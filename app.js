@@ -1,4 +1,21 @@
 (() => {
+  const $ = id => document.getElementById(id)
+  const _ = selector => document.querySelector(selector)
+  const __ = selector => document.querySelectorAll(selector)
+
+  HTMLElement.prototype._ = function (selector) {
+    return this.querySelector(selector)
+  }
+  HTMLElement.prototype.__ = function (selector) {
+    return this.querySelectorAll(selector)
+  }
+  HTMLElement.prototype.show = function () {
+    this.classList.remove('hidden')
+  }
+  HTMLElement.prototype.hide = function () {
+    this.classList.add('hidden')
+  }
+
   const state = {
     shouldRecordCommand: false,
     shouldStartEditor: true,
@@ -6,37 +23,32 @@
     openPopup: ''
   }
 
-  const vim = document.getElementById('vim')
-  const banner = vim.querySelector('.banner')
-  const editor = vim.querySelector('.editor')
-  const popup = vim.querySelector('.popup')
-  const statusBar = vim.querySelector('.vim .status-bar')
-  const colonSpan = statusBar.querySelector('.vim .status-bar--colon')
-  const commandSpan = statusBar.querySelector('.vim .status-bar--command')
-  const errorSpan = statusBar.querySelector('.vim .status-bar--error')
-  const modeSpan = statusBar.querySelector('.vim .status-bar--mode')
-  const qSpan = statusBar.querySelector('.vim .status-bar--q')
+  const vim = $('vim')
+  const banner = vim._('.banner')
+  const editor = vim._('.editor')
+  const popup = vim._('.popup')
+  const statusBar = vim._('.vim .status-bar')
+  const colonSpan = statusBar._('.vim .status-bar--colon')
+  const commandSpan = statusBar._('.vim .status-bar--command')
+  const errorSpan = statusBar._('.vim .status-bar--error')
+  const modeSpan = statusBar._('.vim .status-bar--mode')
+  const quitSpan = statusBar._('.vim .status-bar--q')
 
-  const show = el => el.classList.remove('hidden')
-  const showAll = els => els.forEach(el => show(el))
-  const hide = el => el.classList.add('hidden')
-  const hideAll = els => els.forEach(el => hide(el))
-
-  // START THE BLINKING EDITOR CARET
+  // Start blinking the editor caret.
   blink()
 
-  // EDITOR
+  // Editor.
   document.addEventListener('keyup', (e) => {
-    // key === i => Insert mode
+    // key === i
     if (e.keyCode === 73 &&
       state.shouldStartEditor && !editor.isContentEditable) {
       editor.setAttribute('contenteditable', 'true')
-      show(editor.querySelector('div'))
+      editor._('div').show()
       editor.focus()
       toggleEditorCaret()
-      show(modeSpan)
+      modeSpan.show()
       toggleErrorSpan()
-      hide(banner)
+      banner.hide()
       closePopup()
     }
   })
@@ -44,12 +56,12 @@
     if (e.keyCode === 27) { // key === Esc
       editor.removeAttribute('contenteditable')
       toggleEditorCaret()
-      show(banner)
-      // exitCommandMode() <- @TODO: WHY WAS THIS HERE?
+      banner.show()
+      exitCommandMode()
     }
   })
 
-  // STATUS BAR
+  // Status bar.
   document.addEventListener('keydown', (e) => {
     if (e.keyCode === 16) { // key = shift
       document.addEventListener('keydown', (e) => {
@@ -67,17 +79,18 @@
     }
   })
 
-  // COMMANDS
+  // Commands.
   function listenToKeyEvents (shouldRecordCommand) {
     let command = ''
 
     document.addEventListener('keydown', (e) => {
       if (shouldRecordCommand === false) return
 
-      if (e.keyCode in letterKeys) { // @TODO: maybe add ! => e.keyCode === 49
+      if (e.keyCode in letterKeys) {
         command = `${commandSpan.innerText}${e.key}`
         updateCommand(command)
       }
+      // @TODO: add ! => e.keyCode === 49 maybe.
 
       if (e.keyCode === 13) { // key === Enter
         if (command.length === 0) return
@@ -111,10 +124,11 @@
         state.qConfirmation = false
       } else {
         state.qConfirmation = true
-        show(qSpan)
+        quitSpan.show()
       }
     } else if (command in secondaryCommands) {
-      secondaryCommands[command].article === state.openPopup ? secondaryCommands[command].fn() : toggleErrorSpan(command)
+      secondaryCommands[command].article === state.openPopup
+        ? secondaryCommands[command].fn() : toggleErrorSpan(command)
     } else if (command in qCommands) {
       state.qConfirmation ? qCommands[command].fn() : toggleErrorSpan(command)
       state.qConfirmation = false
@@ -127,21 +141,21 @@
     commandSpan.innerText = command
   }
 
-  // TOGGLE WRAPPERS
+  // Toggle wrappers.
   function toggleStatusBar () {
-    showAll([colonSpan, commandSpan])
-    hide(qSpan)
+    [colonSpan, commandSpan].forEach(el => el.show())
+    quitSpan.hide()
     toggleErrorSpan()
     toggleEditorCaret()
   }
   function exitCommandMode () {
-    hideAll([modeSpan, colonSpan, commandSpan])
+    [modeSpan, colonSpan, commandSpan].forEach(el => el.hide())
     commandSpan.innerText = ''
     toggleEditorCaret()
   }
   function toggleErrorSpan (command = '') {
-    command === '' ? hide(errorSpan) : show(errorSpan)
-    errorSpan.querySelector('.status-bar--error--command').innerText = command
+    command === '' ? errorSpan.hide() : errorSpan.show()
+    errorSpan._('.status-bar--error--command').innerText = command
   }
   function toggleEditorCaret () {
     if (editor.classList.contains('has-caret')) {
@@ -151,24 +165,24 @@
     }
   }
 
-  // POPUP
+  // Popup.
   function openPopup (command) {
     state.openPopup = command
-    show(popup)
-    popup.querySelector('.popup--wrapper').focus()
-    popup.querySelectorAll('article').forEach(article => hide(article))
-    show(popup.querySelector(`article.popup--${command}`))
+    popup.show()
+    popup._('.popup--wrapper').focus()
+    popup.__('article').forEach(article => article.hide())
+    popup._(`article.popup--${command}`).show()
   }
   function closePopup () {
-    hide(popup)
-    popup.querySelectorAll('article').forEach(article => hide(article))
+    popup.hide()
+    popup.__('article').forEach(article => article.hide())
     state.openPopup = ''
   }
 
-  // CARET BLINKING
+  // Caret.
   function blink () {
-    if (document.body.clientWidth < 584) return
-    const haveCarets = document.querySelectorAll('.has-caret')
+    if (document.body.clientWidth < 813) return
+    const haveCarets = __('.has-caret')
     window.setInterval(function () {
       haveCarets.forEach(caret => {
         if (caret.classList.contains('hidden')) return
@@ -178,15 +192,15 @@
     }, 500)
   }
 
-  // Q FUNCTIONS
+  // Quit Functions.
   const qYes = () => alert('Sorry, I can\'t close the browser tab for, you\'ll have to do it yourself. Bye.')
-  const qNo = () => hide(qSpan)
+  const qNo = () => quitSpan.hide()
   const qCommands = {
     yes: { fn: () => qYes() },
     no: { fn: () => qNo() }
   }
 
-  // SECONDARY COMMANDS AND FUNCTIONS
+  // Secondary commands and functions.
   function copyFn () {
     const temp = document.createElement('input')
     temp.value = ['levon', 'avetyan@gmail', 'com'].join('.')
@@ -196,12 +210,12 @@
     document.body.removeChild(temp)
   }
   function fixPhotoFn () {
-    document.getElementById('levon').style.filter = 'unset'
+    $('levon').style.filter = 'unset'
   }
   function openLinkFn () {
     const link = document.createElement('a')
     link.innerText = 'source'
-    hide(link)
+    link.hide()
     link.setAttribute('href', 'https://github.com/levonium/levondev')
     link.setAttribute('target', '_blank')
     link.setAttribute('rel', 'noopener,noreferrer')
@@ -233,11 +247,10 @@
     'theme dark': { article: 'settings', fn: () => changeTheme({ theme: 'dark', colors: darkColors }) }
   }
 
-  // LEGAL COMMANDS AND LETTER KEYS
+  // Legal commands and letter keys.
   const legalCommands = [
     'q', 'help', 'settings', 'email', 'photo', 'offer', 'privacy', 'terms'
   ]
-  // 'source'
   const letterKeys = {
     32: ' ',
     65: 'a',
@@ -268,18 +281,18 @@
     90: 'z'
   }
 
-  // SM SCREEN SELECTORS AND EVENT LISTENERS
-  const smClosePopupButton = document.querySelector('.controls--top')
+  // SM screen selectors and event listeners.
+  const smClosePopupButton = _('.controls--top')
   smClosePopupButton.addEventListener('click', () => {
     closePopup()
-    hide(smClosePopupButton)
+    smClosePopupButton.hide()
   })
-  document.querySelectorAll('[data-section]')
+  __('[data-section]')
     .forEach(button => button.addEventListener('click', (e) => {
       openPopup(e.target.dataset.section)
-      show(smClosePopupButton)
+      smClosePopupButton.show()
     }))
-  document.querySelectorAll('[data-fn]')
+  __('[data-fn]')
     .forEach(button => button.addEventListener('click', (e) => {
       const fnName = e.target.dataset.fn.replace('-', ' ')
       const fn = secondaryCommands[fnName].fn

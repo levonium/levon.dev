@@ -1,5 +1,4 @@
 /** BASE **/
-
 html, body {
   margin: 0;
   padding: 0;
@@ -11,18 +10,6 @@ html, body {
 
 * {
   box-sizing: inherit;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.hidden__sm {
-  display: none !important;
-}
-
-p {
-  margin-top: 0;
 }
 
 body {
@@ -45,6 +32,17 @@ body {
   --banner-padding: 0 2rem;
 }
 
+.hidden {
+  display: none !important;
+}
+
+.hidden__sm {
+  display: none !important;
+}
+
+p {
+  margin-top: 0;
+}
 /** END BASE **/
 
 /** VIM **/
@@ -323,7 +321,7 @@ body {
 
 /** MEDIA QUERIES **/
 
-@media screen and (min-width: 584px) {
+@media screen and (min-width: 813px) {
   .hidden__sm {
     display: block !important;
   }
@@ -336,7 +334,7 @@ body {
   .vim {
     --bg-image-dark: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="30px" height="20px" fill="lightblue"><text x="5" y="15">~</text></svg>');
     --bg-image-light: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="30px" height="20px" fill="darkblue"><text x="5" y="15">~</text></svg>');
-    --popup-width: 584px;
+    --popup-width: 600px;
     --screen-height: 100vh;
     --popup-padding: 2rem;
     --banner-padding: 0;

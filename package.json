@@ -7,7 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Levon Avetyan",
+  "homepage": "https://levon.dev",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:levonium/levon.dev.git"
+  },
   "devDependencies": {
     "eslint": "^6.1.0",
     "eslint-config-standard": "^13.0.1",
