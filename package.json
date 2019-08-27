@@ -4,7 +4,7 @@
   "description": "levon.dev",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf dist && mkdir dist && cp index.html dist/ && cp app.js dist/ && cp app.css dist/ && cp assets/icon.png dist/ && cp assets/levon.jpg dist/"
   },
   "author": "Levon Avetyan",
   "homepage": "https://levon.dev",

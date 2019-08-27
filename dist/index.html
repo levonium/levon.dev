@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87724007-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || []
+		function gtag() { dataLayer.push(arguments) }
+		gtag('js', new Date())
+		gtag('config', 'UA-87724007-4')
+	</script>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Levon Avetyan | Web Developer | I make websites 🤯</title>
+	<meta name="description" content="Hi, I'm Levon, a web developer. I make things that live on the Internet, and some of them are actually useful 🤯 - levon.dev">
+	<link rel="canonical" href="https://levon.dev">
+
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Rubik:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="app.css">
+	<link rel="shortcut icon" href="icon.png" type="image/x-icon">
+</head>
+
+<body>
+	<button class="screen-reader-text">Content</button>
+	<main id="vim" class="vim">
+
+		<section class="editor has-caret">
+
+			<div class="editor--label hidden">
+				<br /><br />
+			</div>
+		</section>
+		<!-- .editor -->
+
+		<section class="banner">
+
+			<h1>LEVON.DEV</h1>
+			<p>version 1.0.0
+				<br />
+				by Levon Avetyan
+			</p>
+			<p>
+				I'm a web developer, I make things that live on the Internet,
+				and some of them are actually useful 🤯
+			</p>
+
+			<div class="instructions hidden__sm">
+				<p class="instruction">
+					<span class="instruction--type">type</span>
+					<span class="instruction--command">
+						:email<span class="instruction--key">&lt;Enter&gt;</span>
+					</span>
+					<span class="instruction--help">for email address</span>
+				</p>
+
+				<p class="instruction">
+					<span class="instruction--type">type</span>
+					<span class="instruction--command">
+						:settings<span class="instruction--key">&lt;Enter&gt;</span>
+					</span>
+					<span class="instruction--help">for settings</span>
+				</p>
+
+				<p class="instruction">
+					<span class="instruction--type">type</span>
+					<span class="instruction--command">
+						:help<span class="instruction--key">&lt;Enter&gt;</span>
+					</span>
+					<span class="instruction--help">for inline help</span>
+				</p>
+
+				<p class="instruction">
+					<span class="instruction--type">type</span>
+					<span class="instruction--command">
+						:q<span class="instruction--key">&lt;Enter&gt;</span>
+					</span>
+					<span class="instruction--help">to exit</span>
+				</p>
+			</div>
+
+		</section>
+		<!-- .banner -->
+
+		<section class="popup hidden">
+			<div class="popup--wrapper" tabindex="0">
+
+				<article class="popup--help">
+					<h3>
+						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+							<path
+								d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+						</svg>
+						Help
+					</h3>
+					<p>Please type:</p>
+
+					<p class="help">
+						<span class="help--command">
+							:email<span class="help--key">&lt;Enter&gt;</span>
+						</span>
+						<span class="help--help">for email</span>
+					</p>
+					<p class="help">
+						<span class="help--command">
+							:photo<span class="help--key">&lt;Enter&gt;</span>
+						</span>
+						<span class="help--help">for photo</span>
+					</p>
+					<!-- <p class="help">
+						<span class="help--command">
+							:source<span class="help--key">&lt;Enter&gt;</span>
+						</span>
+						<span class="help--help">for the source code</span>
+					</p> -->
+					<p class="help">
+						<span class="help--command">
+							:offer<span class="help--key">&lt;Enter&gt;</span>
+						</span>
+						<span class="help--help">for offers</span>
+					</p>
+					<p class="help">
+						<span class="help--command">
+							:settings<span class="help--key">&lt;Enter&gt;</span>
+						</span>
+						<span class="help--help">for settings</span>
+					</p>
+					<p class="help">
+						<span class="help--command">i</span>
+						<span class="help--help">to toggle the useless editor</span>
+					</p>
+					<p class="help">
+						<span class="help--command">ESC</span>
+						<span class="help--help">to return to home screen</span>
+					</p>
+					<p class="help">
+						<span class="help--command">
+							:privacy<span class="help--key">&lt;Enter&gt;</span>
+						</span>
+						<span class="help--help">for privacy policy</span>
+					</p>
+					<p class="help">
+						<span class="help--command">
+							:terms<span class="help--key">&lt;Enter&gt;</span>
+						</span>
+						<span class="help--help">for terms of use</span>
+					</p>
+				</article>
+
+				<article class="popup--email">
+					<h3>
+						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+							<path
+								d="M18 2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h16zm-4.37 9.1L20 16v-2l-5.12-3.9L20 6V4l-10 8L0 4v2l5.12 4.1L0 14v2l6.37-4.9L10 14l3.63-2.9z" />
+						</svg>
+						Email
+					</h3>
+					<p>
+						Thanks for taking your time to contact me ✋
+						<br />
+						Here's my email for you:
+					</p>
+					<p>
+						<strong>levon [dot] avetyan [at] gmail [dot] com</strong>
+					</p>
+					<div class="popup--options hidden__sm">
+						<p class="popup--divider">___</p>
+						<p>type</p>
+						<p class="help">
+							<span class="help--command">
+								:copy<span class="help--key">&lt;Enter&gt;</span>
+							</span>
+							<span class="help--help">to copy to clipboard</span>
+						</p>
+					</div>
+					<div class="hidden__lg">
+						<button data-fn="copy">Copy to clipboard</button>
+					</div>
+				</article>
+
+				<article class="popup--photo">
+					<h3>
+						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+							<path
+								d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11 9l-3-3-6 6h16l-5-5-2 2zm4-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+						</svg>
+						Photo
+					</h3>
+					<p>
+						There, that's me.
+					</p>
+					<p>
+						<img id="levon" src="levon.jpg" alt="levon-avetyan" class="photo">
+					</p>
+					<div class="popup--options hidden__sm">
+						<p class="popup--divider">___</p>
+						<p>type</p>
+						<p class="help">
+							<span class="help--command">
+								:fix<span class="help--key">&lt;Enter&gt;</span>
+							</span>
+							<span class="help--help">to bring colors back</span>
+						</p>
+					</div>
+					<div class="hidden__lg">
+						<button data-fn="fix">Bring colors back</button>
+					</div>
+				</article>
+
+				<article class="popup--source">
+					<h3>
+						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+							<path
+								d="M.7 9.3l4.8-4.8 1.4 1.42L2.84 10l4.07 4.07-1.41 1.42L0 10l.7-.7zm18.6 1.4l.7-.7-5.49-5.49-1.4 1.42L17.16 10l-4.07 4.07 1.41 1.42 4.78-4.78z" />
+						</svg>
+						Source
+					</h3>
+					<p>
+						The website source code is available on GitHub.
+					</p>
+					<p>
+						https://github.com/levonium/levondev
+					</p>
+					<div class="popup--options hidden__sm">
+						<p class="popup--divider">___</p>
+						<p>type</p>
+						<p class="help">
+							<span class="help--command">
+								:open<span class="help--key">&lt;Enter&gt;</span>
+							</span>
+							<span class="help--help">to open the URL in a new tab</span>
+						</p>
+					</div>
+				</article>
+
+				<article class="popup--offer">
+					<h3>
+						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+							<path d="M13 8V0L8.11 5.87 3 12h4v8L17 8h-4z" />
+						</svg>
+						Offers
+					</h3>
+					<p>
+						Currently I'm available for new (and shiny) projects.
+					</p>
+					<p>
+						If you have one, go ahead and get in touch, I'm sure we can come up with a great solution.
+					</p>
+					<div class="popup--options hidden__sm">
+						<p class="popup--divider">___</p>
+						<p>type</p>
+						<p class="help">
+							<span class="help--command">
+								:email<span class="help--key">&lt;Enter&gt;</span>
+							</span>
+							<span class="help--help">to get in touch</span>
+						</p>
+					</div>
+				</article>
+
+				<article class="popup--privacy">
+					<h3>
+						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+							<path d="M7.667 12H2v8H0V0h12l.333 2H20l-3 6 3 6H8l-.333-2z" />
+						</svg>
+						Privacy
+					</h3>
+					<p>This website doesn't do anything fancy (no 🍪s),it's a simple HTML file, no privacy concerns.
+					</p>
+					<p>However, I use Google Analytics to measure website traffic, and they use cookies for that. You
+						can check Google Analytics privacy policy here: https://policies.google.com/privacy</p>
+					<p class="popup--divider">___</p>
+					<p>By continuing to use this website you accept the above mentioned.</p>
+				</article>
+
+				<article class="popup--terms">
+					<h3>
+						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+							<path d="M0 10V2l2-2h8l10 10-10 10L0 10zm4.5-4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+						</svg>
+						Terms of Use
+					</h3>
+					<p class="popup--divider">___</p>
+					<p>&copy; 2019 Levon Avetyan</p>
+				</article>
+
+				<article class="popup--settings">
+					<h3>
+						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+							<path
+								d="M3.94 6.5L2.22 3.64l1.42-1.42L6.5 3.94c.52-.3 1.1-.54 1.7-.7L9 0h2l.8 3.24c.6.16 1.18.4 1.7.7l2.86-1.72 1.42 1.42-1.72 2.86c.3.52.54 1.1.7 1.7L20 9v2l-3.24.8c-.16.6-.4 1.18-.7 1.7l1.72 2.86-1.42 1.42-2.86-1.72c-.52.3-1.1.54-1.7.7L11 20H9l-.8-3.24c-.6-.16-1.18-.4-1.7-.7l-2.86 1.72-1.42-1.42 1.72-2.86c-.3-.52-.54-1.1-.7-1.7L0 11V9l3.24-.8c.16-.6.4-1.18.7-1.7zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+						</svg>
+						Settings
+					</h3>
+					<p>
+						Adjust the website settings.
+					</p>
+					<div class="popup--options hidden__sm">
+						<p class="popup--divider">___</p>
+						<p>type</p>
+						<p class="help">
+							<span class="help--command">
+								:theme light<span class="help--key">&lt;Enter&gt;</span>
+							</span>
+							<span class="help--help">for light theme</span>
+						</p>
+						<p class="help">
+							<span class="help--command">
+								:theme dark<span class="help--key">&lt;Enter&gt;</span>
+							</span>
+							<span class="help--help">for dark theme</span>
+						</p>
+					</div>
+					<div class="hidden__lg">
+						<button data-fn="theme-light">Light theme</button>
+						<button data-fn="theme-dark">Dark theme</button>
+					</div>
+				</article>
+			</div>
+		</section>
+		<!-- .popup -->
+
+		<section class="status-bar">
+			<span class="status-bar--colon hidden">:</span>
+			<span class="status-bar--command has-caret hidden"></span>
+			<span class="status-bar--error hidden">
+				E492: Not an editor command:
+				<span class="status-bar--error--command"></span>
+			</span>
+			<span class="status-bar--q hidden">
+				Really? type :yes to confirm 😿 or :no to stay 😻
+			</span>
+			<span class="status-bar--mode hidden">-- INSERT --</span>
+		</section>
+		<!-- .status-bar -->
+
+	</main>
+	<!-- .vim -->
+
+	<section class="controls">
+
+		<div class="controls--bottom">
+			<button data-section="email" class="square" style="background-color: #64a790" title="email">
+				<span class="screen-reader-text">email</span>
+				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+					<path
+						d="M18 2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h16zm-4.37 9.1L20 16v-2l-5.12-3.9L20 6V4l-10 8L0 4v2l5.12 4.1L0 14v2l6.37-4.9L10 14l3.63-2.9z" />
+				</svg>
+			</button>
+			<button data-section="photo" class="square" style="background-color: #9c2c2c" title="photo">
+				<span class="screen-reader-text">photo</span>
+				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+					<path
+						d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11 9l-3-3-6 6h16l-5-5-2 2zm4-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+				</svg>
+			</button>
+			<button data-section="offer" class="square" style="background-color: #638aa7" title="offer">
+				<span class="screen-reader-text">offer</span>
+				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+					<path d="M13 8V0L8.11 5.87 3 12h4v8L17 8h-4z" />
+				</svg>
+			</button>
+			<button data-section="settings" class="square" style="background-color: #c2ce6b" title="settings">
+				<span class="screen-reader-text">settings</span>
+				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+					<path
+						d="M.7 9.3l4.8-4.8 1.4 1.42L2.84 10l4.07 4.07-1.41 1.42L0 10l.7-.7zm18.6 1.4l.7-.7-5.49-5.49-1.4 1.42L17.16 10l-4.07 4.07 1.41 1.42 4.78-4.78z" />
+				</svg>
+			</button>
+		</div>
+		<div class="controls--top hidden">
+			<button class="square" style="background-color: white; color: #000">
+				<span class="screen-reader-text">000</span>
+				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+					<path
+						d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+				</svg>
+			</button>
+		</div>
+	</section>
+
+	<script src="app.js"></script>
+</body>
+</html>
