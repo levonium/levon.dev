@@ -1,41 +1,33 @@
 (() => {
-  const $ = id => document.getElementById(id)
-  const _ = selector => document.querySelector(selector)
-  const __ = selector => document.querySelectorAll(selector)
+  const $ = selector => selector.startsWith('#')
+    ? document.getElementById(selector.substr(1))
+    : document.querySelector(selector)
+  const $$ = selector => document.querySelectorAll(selector)
+  const show = el => el.classList.remove('hidden')
+  const hide = el => el.classList.add('hidden')
 
-  HTMLElement.prototype._ = function (selector) {
-    return this.querySelector(selector)
-  }
-  HTMLElement.prototype.__ = function (selector) {
-    return this.querySelectorAll(selector)
-  }
-  HTMLElement.prototype.show = function () {
-    this.classList.remove('hidden')
-  }
-  HTMLElement.prototype.hide = function () {
-    this.classList.add('hidden')
-  }
+  HTMLElement.prototype.$ = selector => $(selector)
+  HTMLElement.prototype.$$ = selector => $$(selector)
+  HTMLElement.prototype.show = function () { show(this) }
+  HTMLElement.prototype.hide = function () { hide(this) }
 
   const state = {
     shouldRecordCommand: false,
     shouldStartEditor: true,
-    qConfirmation: false,
+    confirmQuit: false,
     openPopup: ''
   }
 
-  const vim = $('vim')
-  const banner = vim._('.banner')
-  const editor = vim._('.editor')
-  const popup = vim._('.popup')
-  const statusBar = vim._('.vim .status-bar')
-  const colonSpan = statusBar._('.vim .status-bar--colon')
-  const commandSpan = statusBar._('.vim .status-bar--command')
-  const errorSpan = statusBar._('.vim .status-bar--error')
-  const modeSpan = statusBar._('.vim .status-bar--mode')
-  const quitSpan = statusBar._('.vim .status-bar--q')
-
-  // Start blinking the editor caret.
-  blink()
+  const vim = $('#vim')
+  const banner = vim.$('.banner')
+  const editor = vim.$('.editor')
+  const popup = vim.$('.popup')
+  const statusBar = vim.$('.vim .status-bar')
+  const colonSpan = statusBar.$('.vim .status-bar--colon')
+  const commandSpan = statusBar.$('.vim .status-bar--command')
+  const errorSpan = statusBar.$('.vim .status-bar--error')
+  const modeSpan = statusBar.$('.vim .status-bar--mode')
+  const quitSpan = statusBar.$('.vim .status-bar--q')
 
   // Editor.
   document.addEventListener('keyup', (e) => {
@@ -43,7 +35,7 @@
     if (e.keyCode === 73 &&
       state.shouldStartEditor && !editor.isContentEditable) {
       editor.setAttribute('contenteditable', 'true')
-      editor._('div').show()
+      editor.$('div').show()
       editor.focus()
       toggleEditorCaret()
       modeSpan.show()
@@ -121,17 +113,17 @@
     if (legalCommands.includes(command)) {
       if (command !== 'q') {
         openPopup(command)
-        state.qConfirmation = false
+        state.confirmQuit = false
       } else {
-        state.qConfirmation = true
+        state.confirmQuit = true
         quitSpan.show()
       }
     } else if (command in secondaryCommands) {
       secondaryCommands[command].article === state.openPopup
         ? secondaryCommands[command].fn() : toggleErrorSpan(command)
-    } else if (command in qCommands) {
-      state.qConfirmation ? qCommands[command].fn() : toggleErrorSpan(command)
-      state.qConfirmation = false
+    } else if (command in quitCommands) {
+      state.confirmQuit ? quitCommands[command].fn() : toggleErrorSpan(command)
+      state.confirmQuit = false
     } else {
       toggleErrorSpan(command)
     }
@@ -155,7 +147,7 @@
   }
   function toggleErrorSpan (command = '') {
     command === '' ? errorSpan.hide() : errorSpan.show()
-    errorSpan._('.status-bar--error--command').innerText = command
+    errorSpan.$('.status-bar--error--command').innerText = command
   }
   function toggleEditorCaret () {
     if (editor.classList.contains('has-caret')) {
@@ -169,39 +161,40 @@
   function openPopup (command) {
     state.openPopup = command
     popup.show()
-    popup._('.popup--wrapper').focus()
-    popup.__('article').forEach(article => article.hide())
-    popup._(`article.popup--${command}`).show()
+    popup.$('.popup--wrapper').focus()
+    popup.$$('article').forEach(article => article.hide())
+    popup.$(`article.popup--${command}`).show()
   }
   function closePopup () {
     popup.hide()
-    popup.__('article').forEach(article => article.hide())
+    popup.$$('article').forEach(article => article.hide())
     state.openPopup = ''
   }
 
-  // Caret.
+  // Blinking caret.
   function blink () {
     if (document.body.clientWidth < 813) return
-    const haveCarets = __('.has-caret')
+    const haveCarets = $$('.has-caret')
     window.setInterval(function () {
       haveCarets.forEach(caret => {
-        if (caret.classList.contains('hidden')) return
-        if (!caret.classList.contains('has-caret')) return
-        caret.classList.toggle('blink')
+        if (!caret.classList.contains('hidden')) {
+          caret.classList.toggle('blink')
+        }
       })
     }, 500)
   }
+  blink()
 
-  // Quit Functions.
+  // Quit commands and functions.
   const qYes = () => alert('Sorry, I can\'t close the browser tab for, you\'ll have to do it yourself. Bye.')
   const qNo = () => quitSpan.hide()
-  const qCommands = {
+  const quitCommands = {
     yes: { fn: () => qYes() },
     no: { fn: () => qNo() }
   }
 
   // Secondary commands and functions.
-  function copyFn () {
+  function copyEmail () {
     const temp = document.createElement('input')
     temp.value = ['levon', 'avetyan@gmail', 'com'].join('.')
     document.body.appendChild(temp)
@@ -209,14 +202,14 @@
     document.execCommand('copy')
     document.body.removeChild(temp)
   }
-  function fixPhotoFn () {
-    $('levon').style.filter = 'unset'
+  function fixPhoto () {
+    $('#levon').style.filter = 'unset'
   }
-  function openLinkFn () {
+  function openLink () {
     const link = document.createElement('a')
     link.innerText = 'source'
     link.hide()
-    link.setAttribute('href', 'https://github.com/levonium/levondev')
+    link.setAttribute('href', 'https://github.com/levonium/levon.dev')
     link.setAttribute('target', '_blank')
     link.setAttribute('rel', 'noopener,noreferrer')
     document.body.appendChild(link)
@@ -240,9 +233,9 @@
     key: 'rgb(96, 185, 236)'
   }
   const secondaryCommands = {
-    copy: { article: 'email', fn: () => copyFn() },
-    fix: { article: 'photo', fn: () => fixPhotoFn() },
-    open: { article: 'source', fn: () => openLinkFn() },
+    copy: { article: 'email', fn: () => copyEmail() },
+    fix: { article: 'photo', fn: () => fixPhoto() },
+    open: { article: 'source', fn: () => openLink() },
     'theme light': { article: 'settings', fn: () => changeTheme({ theme: 'light', colors: lightColors }) },
     'theme dark': { article: 'settings', fn: () => changeTheme({ theme: 'dark', colors: darkColors }) }
   }
@@ -282,17 +275,17 @@
   }
 
   // SM screen selectors and event listeners.
-  const smClosePopupButton = _('.controls--top')
+  const smClosePopupButton = $('.controls--top')
   smClosePopupButton.addEventListener('click', () => {
     closePopup()
     smClosePopupButton.hide()
   })
-  __('[data-section]')
+  $$('[data-section]')
     .forEach(button => button.addEventListener('click', (e) => {
       openPopup(e.target.dataset.section)
       smClosePopupButton.show()
     }))
-  __('[data-fn]')
+  $$('[data-fn]')
     .forEach(button => button.addEventListener('click', (e) => {
       const fnName = e.target.dataset.fn.replace('-', ' ')
       const fn = secondaryCommands[fnName].fn
