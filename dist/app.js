@@ -196,7 +196,7 @@
   // Secondary commands and functions.
   function copyEmail () {
     const temp = document.createElement('input')
-    temp.value = ['levon', 'avetyan@gmail', 'com'].join('.')
+    temp.value = ['levon', 'drim.io'].join('@')
     document.body.appendChild(temp)
     temp.select()
     document.execCommand('copy')
