@@ -242,7 +242,7 @@
 
   // Legal commands and letter keys.
   const legalCommands = [
-    'q', 'help', 'settings', 'email', 'photo', 'offer', 'privacy', 'terms'
+    'q', 'help', 'settings', 'email', 'photo', 'source', 'offer', 'privacy', 'terms'
   ]
   const letterKeys = {
     32: ' ',
