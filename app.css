@@ -112,6 +112,10 @@ p {
   padding-left: 0.5rem;
   background-color: var(--color-bg);
   outline: none;
+  scrollbar-width: none;
+}
+.vim .editor::-webkit-scrollbar {
+  display: none;
 }
 
 .vim .editor div {
@@ -137,6 +141,10 @@ p {
   overflow-y: scroll;
   background-color: var(--color-bg);
   outline: none;
+  scrollbar-width: none;
+}
+.vim .popup::-webkit-scrollbar {
+  display: none;
 }
 
 .popup--wrapper {
