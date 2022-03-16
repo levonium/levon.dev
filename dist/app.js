@@ -32,7 +32,7 @@
   // Editor.
   document.addEventListener('keyup', (e) => {
     // key === i
-    if (e.keyCode === 73 &&
+    if (e.key === 'i' &&
       state.shouldStartEditor && !editor.isContentEditable) {
       editor.setAttribute('contenteditable', 'true')
       editor.$('div').show()
@@ -45,7 +45,7 @@
     }
   })
   editor.addEventListener('keydown', (e) => {
-    if (e.keyCode === 27) { // key === Esc
+    if (e.code === 'Escape') {
       editor.removeAttribute('contenteditable')
       toggleEditorCaret()
       banner.show()
@@ -55,16 +55,16 @@
 
   // Status bar.
   document.addEventListener('keydown', (e) => {
-    if (e.keyCode === 16) { // key = shift
+    if (e.key === 'Shift') {
       document.addEventListener('keydown', (e) => {
-        if (e.keyCode === 186 || e.keyCode === 59) { // key = colon
+        if (e.code === 'Semicolon') { // Shift + Semicolon = Colon
           state.shouldRecordCommand = true
           state.shouldStartEditor = false
           toggleStatusBar()
           listenToKeyEvents(state.shouldRecordCommand)
         }
       }, { once: true })
-    } else if (e.keyCode === 27) {
+    } else if (e.code === 'Escape') {
       closePopup()
     } else {
       state.shouldRecordCommand = false
@@ -78,26 +78,26 @@
     document.addEventListener('keydown', (e) => {
       if (shouldRecordCommand === false) return
 
-      if (e.keyCode in letterKeys) {
+      if (e.code in letterKeys) {
         command = `${commandSpan.innerText}${e.key}`
         updateCommand(command)
       }
-      // @TODO: add ! => e.keyCode === 49 maybe.
+      // @TODO: add ! maybe.
 
-      if (e.keyCode === 13) { // key === Enter
+      if (e.code === 'Enter') {
         if (command.length === 0) return
         executeCommand(command)
         shouldRecordCommand = false
         state.shouldStartEditor = true
       }
 
-      if (e.keyCode === 27) { // key === Esc
+      if (e.code === 'Escape') {
         exitCommandMode()
         shouldRecordCommand = false
         state.shouldStartEditor = true
       }
 
-      if (e.keyCode === 8) { // key === Backspace
+      if (e.code === 'Backspace') {
         if (command.length === 0) {
           exitCommandMode()
           shouldRecordCommand = false
@@ -245,34 +245,34 @@
     'q', 'help', 'settings', 'email', 'photo', 'source', 'offer', 'privacy', 'terms'
   ]
   const letterKeys = {
-    32: ' ',
-    65: 'a',
-    66: 'b',
-    67: 'c',
-    68: 'd',
-    69: 'e',
-    70: 'f',
-    71: 'g',
-    72: 'h',
-    73: 'i',
-    74: 'j',
-    75: 'k',
-    76: 'l',
-    77: 'm',
-    78: 'n',
-    79: 'o',
-    80: 'p',
-    81: 'q',
-    82: 'r',
-    83: 's',
-    84: 't',
-    85: 'u',
-    86: 'v',
-    87: 'w',
-    88: 'x',
-    89: 'y',
-    90: 'z'
-  }
+    Space: ' ',
+    KeyA: 'a',
+    KeyB: 'b',
+    KeyC: 'c',
+    KeyD: 'd',
+    KeyE: 'e',
+    KeyF: 'f',
+    KeyG: 'g',
+    KeyH: 'h',
+    KeyI: 'i',
+    KeyJ: 'j',
+    KeyK: 'k',
+    KeyL: 'l',
+    KeyM: 'm',
+    KeyN: 'n',
+    KeyO: 'o',
+    KeyP: 'p',
+    KeyQ: 'q',
+    KeyR: 'r',
+    KeyS: 's',
+    KeyT: 't',
+    KeyU: 'u',
+    KeyV: 'v',
+    KeyW: 'w',
+    KeyX: 'x',
+    KeyY: 'y',
+    KeyZ: 'z'
+ }
 
   // SM screen selectors and event listeners.
   const smClosePopupButton = $('.controls--top')
