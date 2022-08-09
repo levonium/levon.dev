@@ -109,26 +109,40 @@
       }
     })
   }
+
   function executeCommand (command) {
+
     if (legalCommands.includes(command)) {
+
       if (command !== 'q') {
         openPopup(command)
         state.confirmQuit = false
+
       } else {
+
         state.confirmQuit = true
         quitSpan.show()
       }
+
     } else if (command in secondaryCommands) {
+
       secondaryCommands[command].article === state.openPopup
-        ? secondaryCommands[command].fn() : toggleErrorSpan(command)
+        ? secondaryCommands[command].fn()
+        : toggleErrorSpan(command)
+
     } else if (command in quitCommands) {
+
       state.confirmQuit ? quitCommands[command].fn() : toggleErrorSpan(command)
       state.confirmQuit = false
+
     } else {
+
       toggleErrorSpan(command)
     }
+
     exitCommandMode()
   }
+
   function updateCommand (command) {
     commandSpan.innerText = command
   }
@@ -140,15 +154,18 @@
     toggleErrorSpan()
     toggleEditorCaret()
   }
+
   function exitCommandMode () {
     [modeSpan, colonSpan, commandSpan].forEach(el => el.hide())
     commandSpan.innerText = ''
     toggleEditorCaret()
   }
+
   function toggleErrorSpan (command = '') {
     command === '' ? errorSpan.hide() : errorSpan.show()
     errorSpan.$('.status-bar--error--command').innerText = command
   }
+
   function toggleEditorCaret () {
     if (editor.classList.contains('has-caret')) {
       editor.classList.remove('has-caret')
@@ -165,6 +182,7 @@
     popup.$$('article').forEach(article => article.hide())
     popup.$(`article.popup--${command}`).show()
   }
+
   function closePopup () {
     popup.hide()
     popup.$$('article').forEach(article => article.hide())
@@ -174,8 +192,10 @@
   // Blinking caret.
   function blink () {
     if (document.body.clientWidth < 813) return
+
     const haveCarets = $$('.has-caret')
-    window.setInterval(function () {
+
+    window.setInterval(() => {
       haveCarets.forEach(caret => {
         if (!caret.classList.contains('hidden')) {
           caret.classList.toggle('blink')
@@ -183,59 +203,60 @@
       })
     }, 500)
   }
+
   blink()
 
   // Quit commands and functions.
-  const qYes = () => alert('Sorry, I can\'t close the browser tab for, you\'ll have to do it yourself. Bye.')
-  const qNo = () => quitSpan.hide()
   const quitCommands = {
-    yes: { fn: () => qYes() },
-    no: { fn: () => qNo() }
+    yes: { fn: () => alert('Sorry, I can\'t close the browser tab for, you\'ll have to do it yourself. Bye.') },
+    no: { fn: () => quitSpan.hide() }
   }
 
   // Secondary commands and functions.
-  function copyEmail () {
-    const temp = document.createElement('input')
-    temp.value = ['levon', 'drim.io'].join('@')
-    document.body.appendChild(temp)
-    temp.select()
-    document.execCommand('copy')
-    document.body.removeChild(temp)
+  async function copyEmail () {
+    const email = ['levon', 'levon.dev'].join('@')
+    navigator.clipboard.writeText(email)
   }
-  function fixPhoto () {
-    $('#levon').style.filter = 'unset'
-  }
-  function openLink () {
+
+  function openLink (url) {
     const link = document.createElement('a')
     link.innerText = 'source'
     link.hide()
-    link.setAttribute('href', 'https://github.com/levonium/levon.dev')
+    link.setAttribute('href'. url)
     link.setAttribute('target', '_blank')
     link.setAttribute('rel', 'noopener,noreferrer')
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
   }
+
+  function fixPhoto () {
+    $('#levon').style.filter = 'unset'
+  }
+
   function changeTheme ({ theme, colors }) {
     vim.classList.remove(theme)
     document.body.style.setProperty('--color-bg', colors.bg)
     document.body.style.setProperty('--color-font', colors.font)
     document.body.style.setProperty('--color-key', colors.key)
   }
+
   const lightColors = {
     bg: '#f1f1f1',
     font: '#1a1a1a',
     key: '#0037ff'
   }
+
   const darkColors = {
     bg: 'rgb(40, 50, 55)',
     font: '#fff',
     key: 'rgb(96, 185, 236)'
   }
+
   const secondaryCommands = {
-    copy: { article: 'email', fn: () => copyEmail() },
+    copy: { article: 'email', fn: async () => await copyEmail() },
     fix: { article: 'photo', fn: () => fixPhoto() },
-    open: { article: 'source', fn: () => openLink() },
+    open: { article: 'source', fn: () => openLink('https://github.com/levonium/levon.dev') },
     'theme light': { article: 'settings', fn: () => changeTheme({ theme: 'light', colors: lightColors }) },
     'theme dark': { article: 'settings', fn: () => changeTheme({ theme: 'dark', colors: darkColors }) }
   }
@@ -244,6 +265,7 @@
   const legalCommands = [
     'q', 'help', 'settings', 'email', 'photo', 'source', 'offer', 'privacy', 'terms'
   ]
+
   const letterKeys = {
     Space: ' ',
     KeyA: 'a',
@@ -280,11 +302,13 @@
     closePopup()
     smClosePopupButton.hide()
   })
+
   $$('[data-section]')
     .forEach(button => button.addEventListener('click', (e) => {
       openPopup(e.target.dataset.section)
       smClosePopupButton.show()
     }))
+
   $$('[data-fn]')
     .forEach(button => button.addEventListener('click', (e) => {
       const fnName = e.target.dataset.fn.replace('-', ' ')
