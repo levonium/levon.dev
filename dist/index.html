@@ -12,6 +12,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Rubik:400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="app.css">
 	<link rel="shortcut icon" href="icon.png" type="image/x-icon">
+
+    <script defer data-domain="levon.dev" src="https://plausible.io/js/plausible.js"></script>
 </head>
 
 <body>
@@ -29,7 +31,7 @@
 		<section class="banner">
 
 			<h1>LEVON.DEV</h1>
-			<p>version 1.0.1
+			<p>version 1.0.2
 				<br />
 				by Levon Avetyan
 			</p>
@@ -99,6 +101,12 @@
 							:photo<span class="help--key">&lt;Enter&gt;</span>
 						</span>
 						<span class="help--help">for photo</span>
+					</p>
+					<p class="help">
+						<span class="help--command">
+							:posts<span class="help--key">&lt;Enter&gt;</span>
+						</span>
+						<span class="help--help">for posts</span>
 					</p>
 					<p class="help">
 						<span class="help--command">
@@ -226,6 +234,34 @@
 					</div>
 				</article>
 
+				<article class="popup--posts">
+					<h3>
+                        <svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M2 2c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v18l-8-4-8 4V2z"/>
+                        </svg>
+						Posts
+					</h3>
+					<p>
+						I sometimes publish articles, and you can find them at
+					</p>
+					<p>
+						https://quarks.levon.dev
+					</p>
+					<div class="popup--options hidden__sm">
+						<p class="popup--divider">___</p>
+						<p>type</p>
+						<p class="help">
+							<span class="help--command">
+								:read<span class="help--key">&lt;Enter&gt;</span>
+							</span>
+							<span class="help--help">to open the URL in a new tab</span>
+						</p>
+					</div>
+					<div class="hidden__lg">
+						<button data-fn="read">Check them out</button>
+					</div>
+				</article>
+
 				<article class="popup--offer">
 					<h3>
 						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -315,7 +351,7 @@
 			<span class="status-bar--colon hidden">:</span>
 			<span class="status-bar--command has-caret hidden"></span>
 			<span class="status-bar--error hidden">
-				E492: Not an editor command:
+				E42: Not an editor command:
 				<span class="status-bar--error--command"></span>
 			</span>
 			<span class="status-bar--q hidden">
@@ -345,11 +381,11 @@
 						d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11 9l-3-3-6 6h16l-5-5-2 2zm4-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
 				</svg>
 			</button>
-			<button data-section="offer" class="square" style="background-color: #638aa7" title="offer">
-				<span class="screen-reader-text">offer</span>
-				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-					<path d="M13 8V0L8.11 5.87 3 12h4v8L17 8h-4z" />
-				</svg>
+			<button data-section="posts" class="square" style="background-color: #638aa7" title="posts">
+				<span class="screen-reader-text">posts</span>
+                <svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M2 2c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v18l-8-4-8 4V2z"/>
+                </svg>
 			</button>
 			<button data-section="settings" class="square" style="background-color: #c2ce6b" title="settings">
 				<span class="screen-reader-text">settings</span>

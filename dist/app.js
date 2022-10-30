@@ -72,7 +72,7 @@
   })
 
   // Commands.
-  function listenToKeyEvents (shouldRecordCommand) {
+  function listenToKeyEvents(shouldRecordCommand) {
     let command = ''
 
     document.addEventListener('keydown', (e) => {
@@ -110,7 +110,7 @@
     })
   }
 
-  function executeCommand (command) {
+  function executeCommand(command) {
 
     if (legalCommands.includes(command)) {
 
@@ -143,30 +143,30 @@
     exitCommandMode()
   }
 
-  function updateCommand (command) {
+  function updateCommand(command) {
     commandSpan.innerText = command
   }
 
   // Toggle wrappers.
-  function toggleStatusBar () {
+  function toggleStatusBar() {
     [colonSpan, commandSpan].forEach(el => el.show())
     quitSpan.hide()
     toggleErrorSpan()
     toggleEditorCaret()
   }
 
-  function exitCommandMode () {
+  function exitCommandMode() {
     [modeSpan, colonSpan, commandSpan].forEach(el => el.hide())
     commandSpan.innerText = ''
     toggleEditorCaret()
   }
 
-  function toggleErrorSpan (command = '') {
+  function toggleErrorSpan(command = '') {
     command === '' ? errorSpan.hide() : errorSpan.show()
     errorSpan.$('.status-bar--error--command').innerText = command
   }
 
-  function toggleEditorCaret () {
+  function toggleEditorCaret() {
     if (editor.classList.contains('has-caret')) {
       editor.classList.remove('has-caret')
     } else {
@@ -175,7 +175,7 @@
   }
 
   // Popup.
-  function openPopup (command) {
+  function openPopup(command) {
     state.openPopup = command
     popup.show()
     popup.$('.popup--wrapper').focus()
@@ -183,14 +183,14 @@
     popup.$(`article.popup--${command}`).show()
   }
 
-  function closePopup () {
+  function closePopup() {
     popup.hide()
     popup.$$('article').forEach(article => article.hide())
     state.openPopup = ''
   }
 
   // Blinking caret.
-  function blink () {
+  function blink() {
     if (document.body.clientWidth < 813) return
 
     const haveCarets = $$('.has-caret')
@@ -213,16 +213,16 @@
   }
 
   // Secondary commands and functions.
-  async function copyEmail () {
+  async function copyEmail() {
     const email = ['levon', 'levon.dev'].join('@')
     navigator.clipboard.writeText(email)
   }
 
-  function openLink (url) {
+  function openLink(url) {
     const link = document.createElement('a')
     link.innerText = 'source'
     link.hide()
-    link.setAttribute('href'. url)
+    link.setAttribute('href', url)
     link.setAttribute('target', '_blank')
     link.setAttribute('rel', 'noopener,noreferrer')
     document.body.appendChild(link)
@@ -230,11 +230,11 @@
     document.body.removeChild(link)
   }
 
-  function fixPhoto () {
+  function fixPhoto() {
     $('#levon').style.filter = 'unset'
   }
 
-  function changeTheme ({ theme, colors }) {
+  function changeTheme({ theme, colors }) {
     vim.classList.remove(theme)
     document.body.style.setProperty('--color-bg', colors.bg)
     document.body.style.setProperty('--color-font', colors.font)
@@ -257,13 +257,14 @@
     copy: { article: 'email', fn: async () => await copyEmail() },
     fix: { article: 'photo', fn: () => fixPhoto() },
     open: { article: 'source', fn: () => openLink('https://github.com/levonium/levon.dev') },
+    read: { article: 'posts', fn: () => openLink('https://quarks.levon.dev') },
     'theme light': { article: 'settings', fn: () => changeTheme({ theme: 'light', colors: lightColors }) },
     'theme dark': { article: 'settings', fn: () => changeTheme({ theme: 'dark', colors: darkColors }) }
   }
 
   // Legal commands and letter keys.
   const legalCommands = [
-    'q', 'help', 'settings', 'email', 'photo', 'source', 'offer', 'privacy', 'terms'
+    'q', 'help', 'settings', 'email', 'photo', 'source', 'posts', 'offer', 'privacy', 'terms'
   ]
 
   const letterKeys = {
@@ -294,7 +295,7 @@
     KeyX: 'x',
     KeyY: 'y',
     KeyZ: 'z'
- }
+  }
 
   // SM screen selectors and event listeners.
   const smClosePopupButton = $('.controls--top')

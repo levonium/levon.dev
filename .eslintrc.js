@@ -1,19 +1,32 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true
+    es2021: true
   },
-  extends: [
-    'standard'
+  extends: 'standard',
+  overrides: [
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
-  },
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 'latest',
     sourceType: 'module'
   },
   rules: {
+    quotes: [
+      'error',
+      'single'
+    ],
+    semi: [
+      'error',
+      'never'
+    ],
+    'space-before-function-paren': [
+      'error',
+      {
+        named: 'never',
+        anonymous: 'always',
+        asyncArrow: 'always'
+      }
+    ],
+    'comma-dangle': 'only-multiline'
   }
 }
