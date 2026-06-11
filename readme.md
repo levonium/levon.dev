@@ -1,9 +1,6 @@
 # levon.dev
 
-```
-# copy files to /dist/ and serve from there
-npm run build
+[levon.dev](https://levon.dev) website
 
-# minify css, maybe
-wget -q --post-data="input=`cat dist/app.css`" --output-document=dist/app.css https://www.toptal.com/developers/cssminifier/api/raw
-```
+Personal website / terminal-themed portfolio with a Win95-inspired mobile UI.
+Built as a single HTML file — no frameworks, no build tools.

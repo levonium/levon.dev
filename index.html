@@ -1,410 +1,568 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Levon Avetyan | Web Developer | I make websites 🤯</title>
+        <meta
+            name="description"
+            content="Hi, I'm Levon, a web developer. I make things that live on the Internet, and some of them are actually useful 🤯 - levon.dev"
+        />
+        <link rel="canonical" href="https://levon.dev" />
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Levon Avetyan | Web Developer | I make websites 🤯</title>
-	<meta name="description" content="Hi, I'm Levon, a web developer. I make things that live on the Internet, and some of them are actually useful 🤯 - levon.dev">
-	<link rel="canonical" href="https://levon.dev">
+        <link rel="preconnect" href="https://fonts.bunny.net" />
+        <link
+            href="https://fonts.bunny.net/css?family=rubik:400,700|source-code-pro:400,700"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="assets/app.css" />
+        <link
+            rel="shortcut icon"
+            href="assets/favicon.png"
+            type="image/x-icon"
+        />
+    </head>
 
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=rubik:400,700|source-code-pro:400,700" rel="stylesheet" />
-	<link rel="stylesheet" href="app.css">
-	<link rel="shortcut icon" href="icon.png" type="image/x-icon">
-</head>
+    <body>
+        <button class="screen-reader-text">Content</button>
+        <main id="vim" class="vim">
+            <section class="editor has-caret">
+                <div class="editor--label hidden"><br /><br /></div>
+            </section>
+            <!-- .editor -->
 
-<body>
-	<button class="screen-reader-text">Content</button>
-	<main id="vim" class="vim">
+            <section class="banner">
+                <h1>LEVON.DEV</h1>
+                <p>
+                    version 2.0.0
+                    <br />
+                    by Levon Avetyan
+                </p>
+                <p>
+                    I'm a web developer, I make things that live on the
+                    Internet, and some of them are actually useful 🤯
+                </p>
 
-		<section class="editor has-caret">
+                <div class="instructions visible__sm">
+                    <p class="instruction">
+                        <span class="type">type</span>
+                        <span class="command">
+                            :email<span class="key">&lt;Enter&gt;</span>
+                        </span>
+                        <span class="instruction--help">for email address</span>
+                    </p>
+                    <p class="instruction">
+                        <span class="type">type</span>
+                        <span class="command">
+                            :telegram<span class="key">&lt;Enter&gt;</span>
+                        </span>
+                        <span class="instruction--help"
+                            >for Telegram account</span
+                        >
+                    </p>
 
-			<div class="editor--label hidden">
-				<br /><br />
-			</div>
-		</section>
-		<!-- .editor -->
+                    <p class="instruction">
+                        <span class="type">type</span>
+                        <span class="command">
+                            :settings<span class="key">&lt;Enter&gt;</span>
+                        </span>
+                        <span class="instruction--help">for settings</span>
+                    </p>
 
-		<section class="banner">
+                    <p class="instruction">
+                        <span class="type">type</span>
+                        <span class="command">
+                            :help<span class="key">&lt;Enter&gt;</span>
+                        </span>
+                        <span class="instruction--help">for inline help</span>
+                    </p>
 
-			<h1>LEVON.DEV</h1>
-			<p>version 1.0.2
-				<br />
-				by Levon Avetyan
-			</p>
-			<p>
-				I'm a web developer, I make things that live on the Internet,
-				and some of them are actually useful 🤯
-			</p>
+                    <p class="instruction">
+                        <span class="type">type</span>
+                        <span class="command">
+                            :q<span class="key">&lt;Enter&gt;</span>
+                        </span>
+                        <span class="instruction--help">to exit</span>
+                    </p>
+                </div>
+            </section>
+            <!-- .banner -->
 
-			<div class="instructions hidden__sm">
-				<p class="instruction">
-					<span class="instruction--type">type</span>
-					<span class="instruction--command">
-						:email<span class="instruction--key">&lt;Enter&gt;</span>
-					</span>
-					<span class="instruction--help">for email address</span>
-				</p>
+            <section class="popup hidden">
+                <div class="titlebar hidden__lg">
+                    <span class="title"></span>
+                    <div class="controls">
+                        <button class="min">_</button>
+                        <button class="max">□</button>
+                        <button class="close">✕</button>
+                    </div>
+                </div>
+                <div class="wrapper" tabindex="0">
+                    <article class="popup--help">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"
+                                />
+                            </svg>
+                            Help
+                        </h3>
+                        <p>Please type:</p>
 
-				<p class="instruction">
-					<span class="instruction--type">type</span>
-					<span class="instruction--command">
-						:settings<span class="instruction--key">&lt;Enter&gt;</span>
-					</span>
-					<span class="instruction--help">for settings</span>
-				</p>
+                        <p class="help">
+                            <span class="command">
+                                :email<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for email</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :telegram<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for Telegram account</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :photo<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for photo</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :posts<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for posts</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :source<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for the source code</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :projects<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for projects</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :settings<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for settings</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">i</span>
+                            <span class="for"
+                                >to toggle the useless editor</span
+                            >
+                        </p>
+                        <p class="help">
+                            <span class="command">ESC</span>
+                            <span class="for">to return to home screen</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :privacy<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for privacy policy</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :terms<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for terms of use</span>
+                        </p>
+                    </article>
 
-				<p class="instruction">
-					<span class="instruction--type">type</span>
-					<span class="instruction--command">
-						:help<span class="instruction--key">&lt;Enter&gt;</span>
-					</span>
-					<span class="instruction--help">for inline help</span>
-				</p>
+                    <article class="popup--email">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M18 2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h16zm-4.37 9.1L20 16v-2l-5.12-3.9L20 6V4l-10 8L0 4v2l5.12 4.1L0 14v2l6.37-4.9L10 14l3.63-2.9z"
+                                />
+                            </svg>
+                            Email
+                        </h3>
+                        <p>
+                            Thanks for taking your time to contact me ✋
+                            <br />
+                            Here's my email for you:
+                        </p>
+                        <p>
+                            <strong>levon [at] levon [dot] dev</strong>
+                        </p>
+                        <div class="popup--options visible__sm">
+                            <p class="divider">___</p>
+                            <p>type</p>
+                            <p class="help">
+                                <span class="command">
+                                    :copy<span class="key">&lt;Enter&gt;</span>
+                                </span>
+                                <span class="for">to copy to clipboard</span>
+                            </p>
+                        </div>
+                    </article>
 
-				<p class="instruction">
-					<span class="instruction--type">type</span>
-					<span class="instruction--command">
-						:q<span class="instruction--key">&lt;Enter&gt;</span>
-					</span>
-					<span class="instruction--help">to exit</span>
-				</p>
-			</div>
+                    <article class="popup--telegram">
+                        <h3>
+                            <svg
+                                class="icon"
+                                viewBox="0 0 48 48"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M41.4193 7.30899C41.4193 7.30899 45.3046 5.79399 44.9808 9.47328C44.8729 10.9883 43.9016 16.2908 43.1461 22.0262L40.5559 39.0159C40.5559 39.0159 40.3401 41.5048 38.3974 41.9377C36.4547 42.3705 33.5408 40.4227 33.0011 39.9898C32.5694 39.6652 24.9068 34.7955 22.2086 32.4148C21.4531 31.7655 20.5897 30.4669 22.3165 28.9519L33.6487 18.1305C34.9438 16.8319 36.2389 13.8019 30.8426 17.4812L15.7331 27.7616C15.7331 27.7616 14.0063 28.8437 10.7686 27.8698L3.75342 25.7055C3.75342 25.7055 1.16321 24.0823 5.58815 22.459C16.3807 17.3729 29.6555 12.1786 41.4193 7.30899Z"
+                                />
+                            </svg>
+                            Telegram
+                        </h3>
+                        <p>
+                            Want to chat with me? Here's my account link for
+                            you:
+                        </p>
+                        <p>
+                            <strong>https://t.me/levondev</strong>
+                        </p>
+                        <div class="popup--options visible__sm">
+                            <p class="divider">___</p>
+                            <p>type</p>
+                            <p class="help">
+                                <span class="command">
+                                    :open<span class="key">&lt;Enter&gt;</span>
+                                </span>
+                                <span class="for">to open in Telegram</span>
+                            </p>
+                        </div>
+                    </article>
 
-		</section>
-		<!-- .banner -->
+                    <article class="popup--photo">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11 9l-3-3-6 6h16l-5-5-2 2zm4-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+                                />
+                            </svg>
+                            Photo
+                        </h3>
+                        <p>There, that's me.</p>
+                        <p>
+                            <img
+                                id="levon"
+                                src="assets/levon-2008.jpg"
+                                alt="levon-avetyan"
+                                class="photo"
+                            />
+                        </p>
+                        <div class="popup--options visible__sm">
+                            <p class="divider">___</p>
+                            <p>type</p>
+                            <p class="help" data-photo-year="2008">
+                                <span class="command">
+                                    :photo 2008<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">for 2008 photo</span>
+                            </p>
+                            <p class="help" data-photo-year="2015">
+                                <span class="command">
+                                    :photo 2015<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">for 2015 photo</span>
+                            </p>
+                            <p class="help" data-photo-year="2023">
+                                <span class="command">
+                                    :photo 2023<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">for 2023 photo</span>
+                            </p>
+                            <p class="help" data-photo-year="2026">
+                                <span class="command">
+                                    :photo 2026<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">for 2026 photo</span>
+                            </p>
+                        </div>
+                    </article>
 
-		<section class="popup hidden">
-			<div class="popup--wrapper" tabindex="0">
+                    <article class="popup--source">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M.7 9.3l4.8-4.8 1.4 1.42L2.84 10l4.07 4.07-1.41 1.42L0 10l.7-.7zm18.6 1.4l.7-.7-5.49-5.49-1.4 1.42L17.16 10l-4.07 4.07 1.41 1.42 4.78-4.78z"
+                                />
+                            </svg>
+                            Source
+                        </h3>
+                        <p>The website source code is available on GitHub.</p>
+                        <p>https://github.com/levonium/levondev</p>
+                        <div class="popup--options visible__sm">
+                            <p class="divider">___</p>
+                            <p>type</p>
+                            <p class="help">
+                                <span class="command">
+                                    :open<span class="key">&lt;Enter&gt;</span>
+                                </span>
+                                <span class="for"
+                                    >to open the URL in a new tab</span
+                                >
+                            </p>
+                        </div>
+                    </article>
 
-				<article class="popup--help">
-					<h3>
-						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-							<path
-								d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-						</svg>
-						Help
-					</h3>
-					<p>Please type:</p>
+                    <article class="popup--posts">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M2 2c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v18l-8-4-8 4V2z"
+                                />
+                            </svg>
+                            Posts
+                        </h3>
+                        <p>
+                            I sometimes publish articles, and you can find them
+                            at
+                        </p>
+                        <p>https://quarks.levon.dev</p>
+                        <div class="popup--options visible__sm">
+                            <p class="divider">___</p>
+                            <p>type</p>
+                            <p class="help">
+                                <span class="command">
+                                    :read<span class="key">&lt;Enter&gt;</span>
+                                </span>
+                                <span class="for"
+                                    >to open the URL in a new tab</span
+                                >
+                            </p>
+                        </div>
+                    </article>
 
-					<p class="help">
-						<span class="help--command">
-							:email<span class="help--key">&lt;Enter&gt;</span>
-						</span>
-						<span class="help--help">for email</span>
-					</p>
-					<p class="help">
-						<span class="help--command">
-							:photo<span class="help--key">&lt;Enter&gt;</span>
-						</span>
-						<span class="help--help">for photo</span>
-					</p>
-					<p class="help">
-						<span class="help--command">
-							:posts<span class="help--key">&lt;Enter&gt;</span>
-						</span>
-						<span class="help--help">for posts</span>
-					</p>
-					<p class="help">
-						<span class="help--command">
-							:source<span class="help--key">&lt;Enter&gt;</span>
-						</span>
-						<span class="help--help">for the source code</span>
-					</p>
-					<p class="help">
-						<span class="help--command">
-							:offer<span class="help--key">&lt;Enter&gt;</span>
-						</span>
-						<span class="help--help">for offers</span>
-					</p>
-					<p class="help">
-						<span class="help--command">
-							:settings<span class="help--key">&lt;Enter&gt;</span>
-						</span>
-						<span class="help--help">for settings</span>
-					</p>
-					<p class="help">
-						<span class="help--command">i</span>
-						<span class="help--help">to toggle the useless editor</span>
-					</p>
-					<p class="help">
-						<span class="help--command">ESC</span>
-						<span class="help--help">to return to home screen</span>
-					</p>
-					<p class="help">
-						<span class="help--command">
-							:privacy<span class="help--key">&lt;Enter&gt;</span>
-						</span>
-						<span class="help--help">for privacy policy</span>
-					</p>
-					<p class="help">
-						<span class="help--command">
-							:terms<span class="help--key">&lt;Enter&gt;</span>
-						</span>
-						<span class="help--help">for terms of use</span>
-					</p>
-				</article>
+                    <article class="popup--projects">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path d="M13 8V0L8.11 5.87 3 12h4v8L17 8h-4z" />
+                            </svg>
+                            Projects
+                        </h3>
+                        <ol>
+                            <li>
+                                <strong>tablrr.app</strong>
+                                -> centralized affiliate table management
+                                platform
+                            </li>
+                            <li>
+                                <strong>DinoMatic</strong> -> WordPress themes
+                                and plugins for gambling and finance affiliates
+                            </li>
+                            <li>
+                                <strong>Learn Markdown</strong> -> a simple
+                                Markdown learning platform
+                            </li>
+                        </ol>
+                        <p class="divider">___</p>
+                        <p>
+                            💚 I'm might be available for new (and shiny)
+                            projects. If you have one, go ahead and get in
+                            touch.
+                        </p>
+                        <div class="popup--options visible__sm">
+                            <p class="divider">___</p>
+                            <p>type</p>
+                            <p class="help">
+                                <span class="command">
+                                    :project 1<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">to open tablrr.app</span>
+                            </p>
+                            <p class="help">
+                                <span class="command">
+                                    :project 2<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">to open DinoMatic</span>
+                            </p>
+                            <p class="help">
+                                <span class="command">
+                                    :project 3<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">to open Learn Markdown</span>
+                            </p>
+                            <p class="help">
+                                <span class="command">
+                                    :email<span class="key">&lt;Enter&gt;</span>
+                                </span>
+                                <span class="for">to get in touch</span>
+                            </p>
+                        </div>
+                    </article>
 
-				<article class="popup--email">
-					<h3>
-						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-							<path
-								d="M18 2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h16zm-4.37 9.1L20 16v-2l-5.12-3.9L20 6V4l-10 8L0 4v2l5.12 4.1L0 14v2l6.37-4.9L10 14l3.63-2.9z" />
-						</svg>
-						Email
-					</h3>
-					<p>
-						Thanks for taking your time to contact me ✋
-						<br />
-						Here's my email for you:
-					</p>
-					<p>
-						<strong>levon [at] levon [dot] dev</strong>
-					</p>
-					<div class="popup--options hidden__sm">
-						<p class="popup--divider">___</p>
-						<p>type</p>
-						<p class="help">
-							<span class="help--command">
-								:copy<span class="help--key">&lt;Enter&gt;</span>
-							</span>
-							<span class="help--help">to copy to clipboard</span>
-						</p>
-					</div>
-					<div class="hidden__lg">
-						<button data-fn="copy">Copy to clipboard</button>
-					</div>
-				</article>
+                    <article class="popup--privacy">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M7.667 12H2v8H0V0h12l.333 2H20l-3 6 3 6H8l-.333-2z"
+                                />
+                            </svg>
+                            Privacy
+                        </h3>
+                        <p>
+                            This website doesn't do anything fancy, it's a
+                            simple HTML file, no privacy concerns.
+                        </p>
+                        <p>No cookies, no Google analytics, no tracking ✋</p>
+                    </article>
 
-				<article class="popup--photo">
-					<h3>
-						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-							<path
-								d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11 9l-3-3-6 6h16l-5-5-2 2zm4-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-						</svg>
-						Photo
-					</h3>
-					<p>
-						There, that's me.
-					</p>
-					<p>
-						<img id="levon" src="levon.jpg" alt="levon-avetyan" class="photo">
-					</p>
-					<div class="popup--options hidden__sm">
-						<p class="popup--divider">___</p>
-						<p>type</p>
-						<p class="help">
-							<span class="help--command">
-								:fix<span class="help--key">&lt;Enter&gt;</span>
-							</span>
-							<span class="help--help">to bring colors back</span>
-						</p>
-					</div>
-					<div class="hidden__lg">
-						<button data-fn="fix">Bring colors back</button>
-					</div>
-				</article>
+                    <article class="popup--terms">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M0 10V2l2-2h8l10 10-10 10L0 10zm4.5-4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                                />
+                            </svg>
+                            Terms of Use
+                        </h3>
+                        <p>No terms 🤯</p>
+                        <p class="divider">___</p>
+                        <p>&copy; Levon Avetyan</p>
+                    </article>
 
-				<article class="popup--source">
-					<h3>
-						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-							<path
-								d="M.7 9.3l4.8-4.8 1.4 1.42L2.84 10l4.07 4.07-1.41 1.42L0 10l.7-.7zm18.6 1.4l.7-.7-5.49-5.49-1.4 1.42L17.16 10l-4.07 4.07 1.41 1.42 4.78-4.78z" />
-						</svg>
-						Source
-					</h3>
-					<p>
-						The website source code is available on GitHub.
-					</p>
-					<p>
-						https://github.com/levonium/levondev
-					</p>
-					<div class="popup--options hidden__sm">
-						<p class="popup--divider">___</p>
-						<p>type</p>
-						<p class="help">
-							<span class="help--command">
-								:open<span class="help--key">&lt;Enter&gt;</span>
-							</span>
-							<span class="help--help">to open the URL in a new tab</span>
-						</p>
-					</div>
-				</article>
+                    <article class="popup--settings">
+                        <h3>
+                            <svg
+                                class="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M3.94 6.5L2.22 3.64l1.42-1.42L6.5 3.94c.52-.3 1.1-.54 1.7-.7L9 0h2l.8 3.24c.6.16 1.18.4 1.7.7l2.86-1.72 1.42 1.42-1.72 2.86c.3.52.54 1.1.7 1.7L20 9v2l-3.24.8c-.16.6-.4 1.18-.7 1.7l1.72 2.86-1.42 1.42-2.86-1.72c-.52.3-1.1.54-1.7.7L11 20H9l-.8-3.24c-.6-.16-1.18-.4-1.7-.7l-2.86 1.72-1.42-1.42 1.72-2.86c-.3-.52-.54-1.1-.7-1.7L0 11V9l3.24-.8c.16-.6.4-1.18.7-1.7zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                                />
+                            </svg>
+                            Settings
+                        </h3>
+                        <p>Adjust the website settings.</p>
+                        <div class="popup--options visible__sm">
+                            <p class="divider">___</p>
+                            <p>type</p>
+                            <p class="help">
+                                <span class="command">
+                                    :theme light<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">for light theme</span>
+                            </p>
+                            <p class="help">
+                                <span class="command">
+                                    :theme dark<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">for dark theme</span>
+                            </p>
+                            <p class="help">
+                                <span class="command">
+                                    :theme matrix<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">for matrix theme</span>
+                            </p>
+                            <p class="help">
+                                <span class="command">
+                                    :clock<span class="key">&lt;Enter&gt;</span>
+                                </span>
+                                <span class="for">to show the time</span>
+                            </p>
+                            <p class="help">
+                                <span class="command">
+                                    :wobble<span class="key"
+                                        >&lt;Enter&gt;</span
+                                    >
+                                </span>
+                                <span class="for">to wobble the page</span>
+                            </p>
+                            <p class="help">
+                                <span class="command">
+                                    :beep<span class="key">&lt;Enter&gt;</span>
+                                </span>
+                                <span class="for">for a vim beep</span>
+                            </p>
+                        </div>
+                    </article>
+                </div>
+                <div class="mobile-actions hidden__lg"></div>
+            </section>
+            <!-- .popup -->
 
-				<article class="popup--posts">
-					<h3>
-                        <svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M2 2c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v18l-8-4-8 4V2z"/>
-                        </svg>
-						Posts
-					</h3>
-					<p>
-						I sometimes publish articles, and you can find them at
-					</p>
-					<p>
-						https://quarks.levon.dev
-					</p>
-					<div class="popup--options hidden__sm">
-						<p class="popup--divider">___</p>
-						<p>type</p>
-						<p class="help">
-							<span class="help--command">
-								:read<span class="help--key">&lt;Enter&gt;</span>
-							</span>
-							<span class="help--help">to open the URL in a new tab</span>
-						</p>
-					</div>
-					<div class="hidden__lg">
-						<button data-fn="read">Check them out</button>
-					</div>
-				</article>
+            <section class="status-bar">
+                <span class="status-bar--colon hidden">:</span>
+                <span class="status-bar--command has-caret hidden"></span>
+                <span class="status-bar--error hidden">
+                    E42: Not an editor command:
+                    <span class="status-bar--error--command"></span>
+                </span>
+                <span class="status-bar--q hidden">
+                    Really? type :yes to confirm 😿 or :no to stay 😻
+                </span>
+                <span class="status-bar--mode hidden">-- INSERT --</span>
+            </section>
+            <!-- .status-bar -->
+        </main>
+        <!-- .vim -->
 
-				<article class="popup--offer">
-					<h3>
-						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-							<path d="M13 8V0L8.11 5.87 3 12h4v8L17 8h-4z" />
-						</svg>
-						Offers
-					</h3>
-					<p>
-						Currently I'm available for new (and shiny) projects.
-					</p>
-					<p>
-						If you have one, go ahead and get in touch, I'm sure we can come up with a great solution.
-					</p>
-					<div class="popup--options hidden__sm">
-						<p class="popup--divider">___</p>
-						<p>type</p>
-						<p class="help">
-							<span class="help--command">
-								:email<span class="help--key">&lt;Enter&gt;</span>
-							</span>
-							<span class="help--help">to get in touch</span>
-						</p>
-					</div>
-				</article>
+        <section class="taskbar hidden__lg">
+            <button class="taskbar--start" id="start-btn">Start</button>
+            <div class="clock"></div>
+        </section>
+        <div class="start-menu hidden hidden__lg" id="start-menu"></div>
 
-				<article class="popup--privacy">
-					<h3>
-						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-							<path d="M7.667 12H2v8H0V0h12l.333 2H20l-3 6 3 6H8l-.333-2z" />
-						</svg>
-						Privacy
-					</h3>
-					<p>This website doesn't do anything fancy, it's a simple HTML file, no privacy concerns.
-					</p>
-					<p>No cookies, no Google analytics, no tracking ✋</p>
-				</article>
-
-				<article class="popup--terms">
-					<h3>
-						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-							<path d="M0 10V2l2-2h8l10 10-10 10L0 10zm4.5-4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-						</svg>
-						Terms of Use
-					</h3>
-					<p>No terms 🤯</p>
-					<p class="popup--divider">___</p>
-					<p>&copy; Levon Avetyan</p>
-				</article>
-
-				<article class="popup--settings">
-					<h3>
-						<svg class="popup--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-							<path
-								d="M3.94 6.5L2.22 3.64l1.42-1.42L6.5 3.94c.52-.3 1.1-.54 1.7-.7L9 0h2l.8 3.24c.6.16 1.18.4 1.7.7l2.86-1.72 1.42 1.42-1.72 2.86c.3.52.54 1.1.7 1.7L20 9v2l-3.24.8c-.16.6-.4 1.18-.7 1.7l1.72 2.86-1.42 1.42-2.86-1.72c-.52.3-1.1.54-1.7.7L11 20H9l-.8-3.24c-.6-.16-1.18-.4-1.7-.7l-2.86 1.72-1.42-1.42 1.72-2.86c-.3-.52-.54-1.1-.7-1.7L0 11V9l3.24-.8c.16-.6.4-1.18.7-1.7zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-						</svg>
-						Settings
-					</h3>
-					<p>
-						Adjust the website settings.
-					</p>
-					<div class="popup--options hidden__sm">
-						<p class="popup--divider">___</p>
-						<p>type</p>
-						<p class="help">
-							<span class="help--command">
-								:theme light<span class="help--key">&lt;Enter&gt;</span>
-							</span>
-							<span class="help--help">for light theme</span>
-						</p>
-						<p class="help">
-							<span class="help--command">
-								:theme dark<span class="help--key">&lt;Enter&gt;</span>
-							</span>
-							<span class="help--help">for dark theme</span>
-						</p>
-					</div>
-					<div class="hidden__lg">
-						<button data-fn="theme-light">Light theme</button>
-						<button data-fn="theme-dark">Dark theme</button>
-					</div>
-				</article>
-			</div>
-		</section>
-		<!-- .popup -->
-
-		<section class="status-bar">
-			<span class="status-bar--colon hidden">:</span>
-			<span class="status-bar--command has-caret hidden"></span>
-			<span class="status-bar--error hidden">
-				E42: Not an editor command:
-				<span class="status-bar--error--command"></span>
-			</span>
-			<span class="status-bar--q hidden">
-				Really? type :yes to confirm 😿 or :no to stay 😻
-			</span>
-			<span class="status-bar--mode hidden">-- INSERT --</span>
-		</section>
-		<!-- .status-bar -->
-
-	</main>
-	<!-- .vim -->
-
-	<section class="controls">
-
-		<div class="controls--bottom">
-			<button data-section="email" class="square" style="background-color: #64a790" title="email">
-				<span class="screen-reader-text">email</span>
-				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-					<path
-						d="M18 2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h16zm-4.37 9.1L20 16v-2l-5.12-3.9L20 6V4l-10 8L0 4v2l5.12 4.1L0 14v2l6.37-4.9L10 14l3.63-2.9z" />
-				</svg>
-			</button>
-			<button data-section="photo" class="square" style="background-color: #9c2c2c" title="photo">
-				<span class="screen-reader-text">photo</span>
-				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-					<path
-						d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11 9l-3-3-6 6h16l-5-5-2 2zm4-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-				</svg>
-			</button>
-			<button data-section="posts" class="square" style="background-color: #638aa7" title="posts">
-				<span class="screen-reader-text">posts</span>
-                <svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M2 2c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v18l-8-4-8 4V2z"/>
-                </svg>
-			</button>
-			<button data-section="settings" class="square" style="background-color: #c2ce6b" title="settings">
-				<span class="screen-reader-text">settings</span>
-				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-					<path
-						d="M.7 9.3l4.8-4.8 1.4 1.42L2.84 10l4.07 4.07-1.41 1.42L0 10l.7-.7zm18.6 1.4l.7-.7-5.49-5.49-1.4 1.42L17.16 10l-4.07 4.07 1.41 1.42 4.78-4.78z" />
-				</svg>
-			</button>
-		</div>
-		<div class="controls--top hidden">
-			<button class="square" style="background-color: white; color: #000">
-				<span class="screen-reader-text">000</span>
-				<svg class="square--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-					<path
-						d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
-				</svg>
-			</button>
-		</div>
-	</section>
-
-	<script src="app.js"></script>
-</body>
+        <script src="assets/app.js"></script>
+    </body>
 </html>

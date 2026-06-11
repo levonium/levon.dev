@@ -1,0 +1,589 @@
+/** BASE **/
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+body {
+  --font-family: "Microsoft Sans Serif", "MS Sans Serif", Arial, sans-serif;
+  --color-font: #fff;
+  --color-bg: #283237;
+  --color-key: #60b9ec;
+  --color-font__popup: #fff;
+  --color-bg__popup: #1772e4;
+  --color-key__popup: #000;
+  --color-error: #ec5f59;
+  --color-border_win: #808080;
+
+  @media (min-width: 812px) {
+    --font-family: "Source Code Pro", sans-serif;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible__sm {
+  display: none !important;
+}
+
+p {
+  margin-top: 0;
+}
+
+/** END BASE **/
+
+/** VIM **/
+
+.vim {
+  --bg-image-dark: none;
+  --bg-image-light: none;
+  --popup-width: 100%;
+  --popup-padding: 0;
+  --banner-padding: 0 2rem;
+
+  height: var(--screen-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-font);
+  background-color: var(--color-bg);
+  cursor: text;
+
+  @media screen and (max-width: 812px) {
+    --screen-height: calc(100vh - 2.5rem);
+    --color-bg: #007c7c;
+  }
+
+  @media (min-width: 812px) {
+    --bg-image-dark: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="30px" height="20px" fill="lightblue"><text x="5" y="15">~</text></svg>');
+    --bg-image-light: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="30px" height="20px" fill="darkblue"><text x="5" y="15">~</text></svg>');
+    --popup-width: 600px;
+    --screen-height: 100vh;
+    --popup-padding: 2rem;
+    --banner-padding: 0;
+
+    &::before {
+      content: "";
+      width: 2rem;
+      height: calc(100% - 3rem);
+      position: absolute;
+      top: 1.5rem;
+      bottom: 1.5rem;
+      left: 0;
+      background-image: var(--bg-image-dark);
+      background-repeat: repeat-y;
+    }
+  }
+
+  &.light {
+    caret-color: #0037ff;
+
+    &::before {
+      background-image: var(--bg-image-light);
+    }
+  }
+
+  &.matrix {
+    caret-color: #0f0;
+  }
+
+  &.wobble {
+    animation: wobble 0.6s ease-in-out;
+  }
+}
+
+/** END VIM **/
+
+/** CARET **/
+
+@media (min-width: 812px) {
+  .has-caret {
+    &::after {
+      content: "";
+      width: 0.6rem;
+      height: 1.375rem;
+      background-color: var(--color-font);
+      display: inline-block;
+      vertical-align: text-bottom;
+      opacity: 0;
+    }
+
+    &.blink::after {
+      opacity: 1;
+    }
+  }
+}
+
+/** END CARET **/
+
+/** EDITOR **/
+@media (min-width: 812px) {
+  .editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: max-content;
+    height: min-content;
+    overflow-y: scroll;
+    padding-left: 0.5rem;
+    background-color: var(--color-bg);
+    outline: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    div {
+      width: max-content;
+      outline: none;
+    }
+  }
+}
+
+/** END EDITOR **/
+
+/** POPUP **/
+
+.popup {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: calc(100vw - 20px);
+  height: auto;
+  max-height: calc(var(--screen-height) - 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  background-color: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+  overflow-y: scroll;
+  outline: none;
+  scrollbar-width: none;
+
+  @media (min-width: 812px) {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: var(--screen-height);
+    max-height: unset;
+    justify-content: center;
+    padding: var(--popup-padding);
+    background-color: var(--color-bg);
+    border-width: 0;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: var(--popup-width);
+    margin: 2px;
+    padding: 0.5rem;
+    color: #000;
+    background-color: #fff;
+    border: 2px solid;
+    border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+    flex: 1;
+    overflow-y: auto;
+
+    @media (min-width: 812px) {
+      flex: unset;
+      margin: 0;
+      padding: 2rem;
+      color: var(--color-font__popup);
+      background-color: var(--color-bg__popup);
+      border-width: 0;
+    }
+  }
+
+  .divider {
+    color: var(--color-bg);
+  }
+
+  h3 {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    fill: currentColor;
+  }
+
+  .help {
+    display: flex;
+
+    .type {
+      width: 4rem;
+    }
+
+    .command {
+      width: 13rem;
+      flex-shrink: 0;
+    }
+
+    .key {
+      color: var(--color-key__popup);
+    }
+  }
+}
+
+.matrix-active .popup {
+  background-color: rgba(40, 50, 55, 0.85);
+}
+
+/** BANNER **/
+
+.banner {
+  max-width: var(--popup-width);
+  padding: var(--banner-padding);
+  text-align: center;
+}
+
+.instructions {
+  text-align: left;
+  width: 80%;
+  margin: 2rem auto;
+
+  .instruction {
+    display: flex;
+    margin-bottom: 0.5rem;
+
+    .type {
+      width: 3rem;
+      margin-right: 1rem;
+    }
+
+    .command {
+      width: 13rem;
+      flex-shrink: 0;
+      margin-right: 1rem;
+    }
+
+    .key {
+      color: var(--color-key);
+    }
+  }
+}
+
+/** END BANNER **/
+
+/** STATUS BAR **/
+
+.status-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background-color: var(--color-bg);
+}
+
+.status-bar--colon {
+  padding-left: 0.5rem;
+}
+
+.status-bar--colon,
+.status-bar--command {
+  padding-right: 0.125rem;
+}
+
+.status-bar--error {
+  padding-left: 0.5rem;
+  background-color: var(--color-error);
+}
+
+.status-bar--q {
+  padding-left: 0.5rem;
+}
+
+.status-bar--clock {
+  margin-left: auto;
+  margin-right: 0.5rem;
+  color: var(--color-key);
+}
+
+/** END STATUS BAR **/
+
+/** WIN95 TASKBAR **/
+
+.taskbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  background: #c0c0c0;
+  border-top: 2px solid #fff;
+  z-index: 999;
+  padding: 0 2px;
+
+  & > button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    height: 1.625rem;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &:active {
+      border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+    }
+
+    &.active {
+      border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+    }
+  }
+
+  .clock {
+    margin-left: auto;
+    height: 1.375rem;
+    display: flex;
+    align-items: center;
+    padding: 0 0.375rem;
+    font-size: 0.6875rem;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+    color: #000;
+  }
+}
+
+/** WIN95 START MENU **/
+
+.start-menu {
+  position: fixed;
+  left: 0;
+  bottom: 2.5rem;
+  width: 12rem;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+  z-index: 998;
+  padding: 2px;
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+    color: #000;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &.selected {
+      background: #000080;
+      color: #fff;
+    }
+  }
+}
+
+/** WIN95 POPUP TITLE BAR **/
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 1.375rem;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  padding: 0 2px;
+  flex-shrink: 0;
+
+  .title {
+    flex: 1;
+    font-size: 0.6875rem;
+    font-weight: bold;
+    color: #fff;
+    padding: 0 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .controls {
+    display: flex;
+    gap: 2px;
+
+    & > button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.125rem;
+      height: 1rem;
+      font-size: 0.5rem;
+      font-weight: bold;
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      -webkit-tap-highlight-color: transparent;
+      font-family: sans-serif;
+
+      &:active {
+        border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+      }
+
+      &.close {
+        font-size: 0.5625rem;
+      }
+    }
+  }
+}
+
+/** WIN95 MOBILE ACTIONS **/
+
+.mobile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 4px;
+  background: #c0c0c0;
+  flex-shrink: 0;
+
+  & > button {
+    height: 1.375rem;
+    padding: 0 0.5rem;
+    font-size: 0.6875rem;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+    cursor: pointer;
+    text-align: left;
+    color: #000;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+
+    &:active {
+      border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+    }
+  }
+}
+
+/** END SM SCREEN CONTROLS **/
+
+/** MEDIA QUERIES **/
+
+@media screen and (min-width: 813px) {
+  .visible__sm {
+    display: block !important;
+  }
+  .hidden__lg {
+    display: none !important;
+  }
+}
+
+/** MEDIA QUERIES **/
+
+/** A11Y **/
+
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+
+  &:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    clip-path: none;
+    color: #21759b;
+    display: block;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+  }
+}
+
+#content[tabindex="-1"]:focus {
+  outline: 0;
+}
+
+/** END A11Y **/
+
+/** WOBBLE **/
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-3px) rotate(-1deg);
+  }
+  20% {
+    transform: translateX(3px) rotate(1deg);
+  }
+  30% {
+    transform: translateX(-3px) rotate(-1deg);
+  }
+  40% {
+    transform: translateX(3px) rotate(1deg);
+  }
+  50% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  60% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  70% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  90% {
+    transform: translateX(-1px);
+  }
+}
+
+/** END WOBBLE **/
