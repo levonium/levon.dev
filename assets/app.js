@@ -444,7 +444,7 @@
 
   const PROJECTS = [
     { url: "https://tablrr.app", label: "tablrr.app" },
-    { url: "https://dinomatic.com", label: "DinoMatic" },
+    { url: "https://affkraft.com", label: "AffKraft.com" },
     { url: "https://learnmarkdown.com", label: "Learn Markdown" },
   ];
 
@@ -458,7 +458,7 @@
       article: "source",
       fn: () => openLink("https://github.com/levonium/levon.dev"),
     },
-    open: {
+    chat: {
       article: "telegram",
       fn: () => openLink("https://t.me/levondev"),
     },
