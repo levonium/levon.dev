@@ -1,5 +1,6 @@
 import { $, hide, copyEmail, openLink } from "./utils.js";
 import { changeTheme, toggleClock, toggleWobble, beep } from "./effects.js";
+import { resetTetris, togglePause } from "./tetris.js";
 
 export const LEGAL_COMMANDS = [
   "q",
@@ -13,6 +14,7 @@ export const LEGAL_COMMANDS = [
   "projects",
   "privacy",
   "terms",
+  "tetris",
 ];
 
 export const NAV_SECTIONS = LEGAL_COMMANDS.filter(
@@ -114,6 +116,8 @@ export const SECONDARY_COMMANDS = [
   { name: "clock", article: "settings", fn: toggleClock },
   { name: "wobble", article: "settings", fn: toggleWobble },
   { name: "beep", article: "settings", fn: beep },
+  { name: "restart", article: "tetris", fn: resetTetris },
+  { name: "pause", article: "tetris", fn: togglePause },
 ];
 
 PROJECTS.forEach((p, i) => {

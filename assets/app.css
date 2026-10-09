@@ -587,3 +587,215 @@ p {
 }
 
 /** END WOBBLE **/
+
+/** TETRIS **/
+
+.popup--tetris {
+  width: 100%;
+}
+
+.tetris-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.tetris-board-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 204px;
+  background-color: #0c0d0e;
+  border: 2px solid;
+  border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+  line-height: 0;
+}
+
+#tetris-canvas {
+  display: block;
+  background-color: #0c0d0e;
+}
+
+.tetris-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  z-index: 10;
+}
+
+.tetris-overlay-msg {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.tetris-overlay-hint {
+  color: #ddd;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.tetris-overlay-hint strong {
+  color: #fff;
+}
+
+.tetris-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1.25rem;
+  min-width: 150px;
+}
+
+.tetris-card {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #000;
+  gap: 0.35rem;
+}
+
+.tetris-card #tetris-next {
+  display: block;
+  background: #0c0d0e;
+  border: 2px solid;
+  border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+}
+
+.tetris-stat {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.tetris-label {
+  font-weight: bold;
+  font-size: 0.6875rem;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+.tetris-val {
+  font-weight: bold;
+  font-family: monospace;
+  color: #000;
+}
+
+.tetris-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 90px;
+  max-width: 140px;
+  padding: 0.4rem 1rem;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+  line-height: 1.2;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tetris-btn:active {
+  border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+}
+
+.tetris-controls-hint {
+  font-size: 0.875rem;
+  line-height: 1.35;
+  opacity: 0.9;
+}
+
+.tetris-hint-title {
+  font-weight: bold;
+  margin-bottom: 0.35rem;
+}
+
+.tetris-hint-row {
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+}
+
+.tetris-touch-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tetris-touch-btn {
+  width: 2.75rem;
+  height: 2.5rem;
+  font-size: 1.125rem;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tetris-touch-btn:active {
+  border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+}
+
+/* Desktop terminal / Vim theme for Tetris */
+@media (min-width: 812px) {
+  .tetris-board-wrapper {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .tetris-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-font__popup);
+  }
+
+  .tetris-card #tetris-next {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .tetris-label {
+    color: var(--color-key);
+    opacity: 0.9;
+  }
+
+  .tetris-val {
+    color: var(--color-font__popup);
+  }
+
+  .tetris-controls-hint {
+    color: var(--color-font__popup);
+  }
+}
+
+/** END TETRIS **/
+

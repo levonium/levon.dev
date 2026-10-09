@@ -7,6 +7,12 @@ import {
   SECONDARY_COMMANDS,
   changePhoto,
 } from "./commands.js";
+import {
+  initTetris,
+  startTetris,
+  pauseTetris,
+  handleTetrisKey,
+} from "./tetris.js";
 
 // --- State ---
 const state = {
@@ -241,9 +247,19 @@ function blink() {
 
 // === Event listeners ===
 
+registerPopupHook("tetris", {
+  onOpen: startTetris,
+  onClose: pauseTetris,
+});
+
 // Editor: press i to enter insert mode
 document.addEventListener("keyup", (e) => {
-  if (e.key === "i" && state.shouldStartEditor && !editor.isContentEditable) {
+  if (
+    e.key === "i" &&
+    state.shouldStartEditor &&
+    !editor.isContentEditable &&
+    !state.openPopup
+  ) {
     editor.contentEditable = "true";
     show(editorLabel);
     editor.focus();
@@ -269,11 +285,14 @@ editor.addEventListener("keydown", (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === ":") {
     state.shouldStartEditor = false;
+    if (state.openPopup === "tetris") pauseTetris();
     toggleStatusBar();
     listenToKeyEvents();
   } else if (e.key === "Escape") {
     closePopup();
     document.getElementById("start-menu")?.classList.add("hidden");
+  } else if (state.openPopup === "tetris" && !removeCommandMode) {
+    handleTetrisKey(e);
   }
 });
 
@@ -305,6 +324,7 @@ document.querySelectorAll(".popup .titlebar .min").forEach((btn) => {
 blink();
 changePhoto(2008);
 buildStartMenu();
+initTetris();
 
 // Win95: taskbar clock (always on)
 const taskbarClock = document.querySelector(".clock");

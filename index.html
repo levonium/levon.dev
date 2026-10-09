@@ -65,6 +65,14 @@
                     <p class="instruction">
                         <span class="type">type</span>
                         <span class="command">
+                            :tetris<span class="key">&lt;Enter&gt;</span>
+                        </span>
+                        <span class="instruction--help">to play Tetris 🎮</span>
+                    </p>
+
+                    <p class="instruction">
+                        <span class="type">type</span>
+                        <span class="command">
                             :settings<span class="key">&lt;Enter&gt;</span>
                         </span>
                         <span class="instruction--help">for settings</span>
@@ -149,6 +157,12 @@
                                 :projects<span class="key">&lt;Enter&gt;</span>
                             </span>
                             <span class="for">for projects</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :tetris<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">to play Tetris 🎮</span>
                         </p>
                         <p class="help">
                             <span class="command">
@@ -534,6 +548,141 @@
                                 </span>
                                 <span class="for">for a vim beep</span>
                             </p>
+                        </div>
+                    </article>
+
+                    <article class="popup--tetris">
+                        <h3>
+                            <svg
+                                class="icon"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M2 2h6v6H2zm8 0h6v6h-6zm-8 8h6v6H2zm16-8h6v6h-6zm-8 8h6v6h-6zm8 0h6v6h-6zm-16 8h6v6H2zm8 0h6v6h-6zm8 0h6v6h-6z"
+                                />
+                            </svg>
+                            Tetris
+                        </h3>
+                        <div class="tetris-layout">
+                            <div class="tetris-board-wrapper">
+                                <canvas
+                                    id="tetris-canvas"
+                                    width="200"
+                                    height="400"
+                                ></canvas>
+                                <div id="tetris-overlay" class="tetris-overlay hidden">
+                                    <div
+                                        class="tetris-overlay-msg"
+                                        id="tetris-overlay-msg"
+                                    >
+                                        PAUSED
+                                    </div>
+                                    <div
+                                        class="tetris-overlay-hint visible__sm"
+                                        id="tetris-overlay-hint"
+                                    ></div>
+                                    <button
+                                        type="button"
+                                        class="tetris-btn hidden__lg"
+                                        id="tetris-overlay-btn"
+                                    >
+                                        Resume
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tetris-info">
+                                <div class="tetris-card">
+                                    <div class="tetris-label">NEXT</div>
+                                    <canvas
+                                        id="tetris-next"
+                                        width="80"
+                                        height="80"
+                                    ></canvas>
+                                </div>
+                                <div class="tetris-card">
+                                    <div class="tetris-stat">
+                                        <span class="tetris-label">SCORE</span>
+                                        <span
+                                            class="tetris-val"
+                                            id="tetris-score"
+                                            >0</span
+                                        >
+                                    </div>
+                                    <div class="tetris-stat">
+                                        <span class="tetris-label">LINES</span>
+                                        <span
+                                            class="tetris-val"
+                                            id="tetris-lines"
+                                            >0</span
+                                        >
+                                    </div>
+                                    <div class="tetris-stat">
+                                        <span class="tetris-label">LEVEL</span>
+                                        <span
+                                            class="tetris-val"
+                                            id="tetris-level"
+                                            >1</span
+                                        >
+                                    </div>
+                                </div>
+                                <div class="tetris-controls-hint visible__sm">
+                                    <div class="tetris-hint-title">Controls:</div>
+                                    <div class="tetris-hint-row">← → / H L : Move</div>
+                                    <div class="tetris-hint-row">↓ / J : Soft Drop</div>
+                                    <div class="tetris-hint-row">↑ / K : Rotate</div>
+                                    <div class="tetris-hint-row">Space : Hard Drop</div>
+                                    <div class="tetris-hint-row">P : Pause &nbsp; R : Restart</div>
+                                    <div class="tetris-hint-row">Commands: :pause, :restart</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tetris-touch-controls hidden__lg">
+                            <button
+                                type="button"
+                                class="tetris-touch-btn"
+                                data-action="rotate"
+                                title="Rotate"
+                                aria-label="Rotate"
+                            >
+                                ↻
+                            </button>
+                            <button
+                                type="button"
+                                class="tetris-touch-btn"
+                                data-action="left"
+                                title="Move Left"
+                                aria-label="Move Left"
+                            >
+                                ◀
+                            </button>
+                            <button
+                                type="button"
+                                class="tetris-touch-btn"
+                                data-action="down"
+                                title="Soft Drop"
+                                aria-label="Soft Drop"
+                            >
+                                ▼
+                            </button>
+                            <button
+                                type="button"
+                                class="tetris-touch-btn"
+                                data-action="right"
+                                title="Move Right"
+                                aria-label="Move Right"
+                            >
+                                ▶
+                            </button>
+                            <button
+                                type="button"
+                                class="tetris-touch-btn"
+                                data-action="drop"
+                                title="Hard Drop"
+                                aria-label="Hard Drop"
+                            >
+                                ⏬
+                            </button>
                         </div>
                     </article>
                 </div>
