@@ -1,0 +1,232 @@
+/** VIM **/
+
+.vim {
+  --bg-image-dark: none;
+  --bg-image-light: none;
+  --popup-width: 100%;
+  --popup-padding: 0;
+  --banner-padding: 0 2rem;
+
+  height: var(--screen-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-font);
+  background-color: var(--color-bg);
+  cursor: text;
+
+  @media screen and (max-width: 812px) {
+    --screen-height: calc(100vh - 2.5rem);
+    --color-bg: #007c7c;
+  }
+
+  @media (min-width: 812px) {
+    --bg-image-dark: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="30px" height="20px" fill="lightblue"><text x="5" y="15">~</text></svg>');
+    --bg-image-light: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="30px" height="20px" fill="darkblue"><text x="5" y="15">~</text></svg>');
+    --popup-width: 600px;
+    --screen-height: 100vh;
+    --popup-padding: 2rem;
+    --banner-padding: 0;
+
+    &::before {
+      content: "";
+      width: 2rem;
+      height: calc(100% - 3rem);
+      position: absolute;
+      top: 1.5rem;
+      bottom: 1.5rem;
+      left: 0;
+      background-image: var(--bg-image-dark);
+      background-repeat: repeat-y;
+    }
+  }
+
+  &.light {
+    caret-color: #0037ff;
+
+    &::before {
+      background-image: var(--bg-image-light);
+    }
+  }
+
+  &.matrix {
+    caret-color: #0f0;
+  }
+
+  &.wobble {
+    animation: wobble 0.6s ease-in-out;
+  }
+}
+
+/** BANNER **/
+
+.banner {
+  max-width: var(--popup-width);
+  padding: var(--banner-padding);
+  text-align: center;
+}
+
+.instructions {
+  text-align: left;
+  width: 80%;
+  margin: 2rem auto;
+
+  .instruction {
+    display: flex;
+    margin-bottom: 0.5rem;
+
+    .type {
+      width: 3rem;
+      margin-right: 1rem;
+    }
+
+    .command {
+      width: 13rem;
+      flex-shrink: 0;
+      margin-right: 1rem;
+    }
+
+    .key {
+      color: var(--color-key);
+    }
+  }
+}
+
+/** STATUS BAR **/
+
+.status-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background-color: var(--color-bg);
+}
+
+.status-bar--colon {
+  padding-left: 0.5rem;
+}
+
+.status-bar--colon,
+.status-bar--command {
+  padding-right: 0.125rem;
+}
+
+.status-bar--error {
+  padding-left: 0.5rem;
+  background-color: var(--color-error);
+}
+
+.status-bar--q {
+  padding-left: 0.5rem;
+}
+
+.status-bar--clock {
+  margin-left: auto;
+  margin-right: 0.5rem;
+  color: var(--color-key);
+}
+
+.status-bar--mode {
+  padding-left: 0.5rem;
+  font-weight: bold;
+  color: var(--color-font);
+}
+
+/** POPUP **/
+
+.popup {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: calc(100vw - 20px);
+  height: auto;
+  max-height: calc(var(--screen-height) - 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  background-color: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
+  overflow-y: scroll;
+  outline: none;
+  scrollbar-width: none;
+
+  @media (min-width: 812px) {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: var(--screen-height);
+    max-height: unset;
+    justify-content: center;
+    padding: var(--popup-padding);
+    background-color: var(--color-bg);
+    border-width: 0;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: var(--popup-width);
+    margin: 2px;
+    padding: 0.5rem;
+    color: #000;
+    background-color: #fff;
+    border: 2px solid;
+    border-color: var(--color-border_win) #fff #fff var(--color-border_win);
+    flex: 1;
+    overflow-y: auto;
+
+    @media (min-width: 812px) {
+      flex: unset;
+      margin: 0;
+      padding: 2rem;
+      color: var(--color-font__popup);
+      background-color: var(--color-bg__popup);
+      border-width: 0;
+    }
+  }
+
+  .divider {
+    color: var(--color-bg);
+  }
+
+  h3 {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    fill: currentColor;
+  }
+
+  .help {
+    display: flex;
+
+    .type {
+      width: 4rem;
+    }
+
+    .command {
+      width: 13rem;
+      flex-shrink: 0;
+    }
+
+    .key {
+      color: var(--color-key__popup);
+    }
+  }
+}
+
+.matrix-active .popup {
+  background-color: rgba(40, 50, 55, 0.85);
+}

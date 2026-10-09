@@ -1,10 +1,10 @@
 import { $, $$, show, hide } from "./utils.js";
 import {
-  LEGAL_COMMANDS,
-  NAV_SECTIONS,
-  QUIT_COMMANDS,
   LETTER_KEYS,
+  NAV_SECTIONS,
+  LEGAL_COMMANDS,
   SECONDARY_COMMANDS,
+  QUIT_COMMANDS,
   changePhoto,
 } from "./commands.js";
 import { initTetris } from "./tetris.js";
@@ -17,6 +17,16 @@ import {
   returnToGamesMenu,
   onGameStateChange,
 } from "./gameManager.js";
+import {
+  initEditor,
+  openEditor,
+  closeEditor,
+  isEditorActive,
+  getEditorMode,
+  saveEditorBuffer,
+  handleEditorEscape,
+  handleNormalModeKey,
+} from "./editor.js";
 
 // --- State ---
 const state = {
@@ -35,8 +45,6 @@ export function registerPopupHook(name, hooks) {
 // --- DOM refs ---
 const vim = $("#vim");
 const banner = vim.querySelector(".banner");
-const editor = vim.querySelector(".editor");
-const editorLabel = editor.querySelector(".editor--label");
 const popup = vim.querySelector(".popup");
 const popupWrapper = popup.querySelector(".popup .wrapper");
 const statusBar = vim.querySelector(".status-bar");
@@ -48,14 +56,6 @@ const modeSpan = statusBar.querySelector(".status-bar--mode");
 const quitSpan = statusBar.querySelector(".status-bar--q");
 
 // === Functions ===
-
-function toggleEditorCaret() {
-  if (editor.classList.contains("has-caret")) {
-    editor.classList.remove("has-caret");
-  } else if (!editor.innerText) {
-    editor.classList.add("has-caret");
-  }
-}
 
 function updateCommand(text) {
   commandSpan.innerText = text;
@@ -71,22 +71,35 @@ function toggleErrorSpan(command = "") {
 }
 
 function toggleStatusBar() {
+  hide(modeSpan);
+  const msgEl = statusBar.querySelector(".status-bar--msg");
+  if (msgEl) hide(msgEl);
   show(colonSpan);
   show(commandSpan);
   hide(quitSpan);
   toggleErrorSpan();
-  toggleEditorCaret();
 }
 
 function exitCommandMode() {
   cleanupCommandMode();
-  [modeSpan, colonSpan, commandSpan].forEach(hide);
+  [colonSpan, commandSpan].forEach(hide);
   commandSpan.innerText = "";
-  toggleEditorCaret();
   state.shouldStartEditor = true;
+  if (!isEditorActive()) {
+    hide(modeSpan);
+  } else {
+    if (modeSpan) {
+      modeSpan.textContent =
+        getEditorMode() === "insert" ? "-- INSERT --" : "-- NORMAL --";
+      show(modeSpan);
+    }
+    $("#editor-textarea")?.focus();
+  }
 }
 
 export function openPopup(command) {
+  if (isEditorActive()) closeEditor();
+
   if (state.openPopup && state.openPopup !== command) {
     const prevHooks = popupHooks.get(state.openPopup);
     if (prevHooks?.onClose) prevHooks.onClose();
@@ -123,6 +136,31 @@ export function closePopup() {
 }
 
 function executeCommand(command) {
+  if (isEditorActive()) {
+    if (command === "q" || command === "q!") {
+      closeEditor();
+      exitCommandMode();
+      return;
+    }
+    if (command === "w" || command === "w!") {
+      saveEditorBuffer();
+      exitCommandMode();
+      return;
+    }
+    if (command === "wq" || command === "wq!" || command === "x") {
+      saveEditorBuffer();
+      closeEditor();
+      exitCommandMode();
+      return;
+    }
+  }
+
+  if (command === "e" || command === "edit") {
+    openEditor("normal");
+    exitCommandMode();
+    return;
+  }
+
   if (LEGAL_COMMANDS.includes(command)) {
     if (command === "q") {
       state.confirmQuit = true;
@@ -192,11 +230,15 @@ function listenToKeyEvents() {
     const key = e.key;
 
     if (key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
       exitCommandMode();
       return;
     }
 
     if (key === "Backspace") {
+      e.preventDefault();
+      e.stopPropagation();
       if (command.length === 0) {
         exitCommandMode();
         return;
@@ -207,12 +249,23 @@ function listenToKeyEvents() {
     }
 
     if (key === "Enter") {
+      e.preventDefault();
+      e.stopPropagation();
       if (command.length > 0) executeCommand(command);
       else exitCommandMode();
       return;
     }
 
-    if (e.code in LETTER_KEYS) {
+    if (
+      e.code in LETTER_KEYS ||
+      key === "!" ||
+      key === "-" ||
+      key === "_" ||
+      key === "/" ||
+      key === "."
+    ) {
+      e.preventDefault();
+      e.stopPropagation();
       command += key;
       updateCommand(command);
     }
@@ -298,46 +351,49 @@ document.addEventListener("keyup", (e) => {
   if (
     e.key === "i" &&
     state.shouldStartEditor &&
-    !editor.isContentEditable &&
-    !state.openPopup
+    !isEditorActive() &&
+    !state.openPopup &&
+    !removeCommandMode
   ) {
-    editor.contentEditable = "true";
-    show(editorLabel);
-    editor.focus();
-    toggleEditorCaret();
-    show(modeSpan);
     toggleErrorSpan();
-    hide(banner);
     closePopup();
-  }
-});
-
-// Editor: Escape to exit insert mode
-editor.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    editor.contentEditable = "false";
-    toggleEditorCaret();
-    show(banner);
-    exitCommandMode();
+    openEditor("insert");
   }
 });
 
 // Global: : for command mode, Escape to close popup
 document.addEventListener("keydown", (e) => {
+  if (removeCommandMode) return;
+
   if (e.key === ":") {
     state.shouldStartEditor = false;
     if (state.openPopup === "games") pauseActiveGame();
+    if (isEditorActive()) {
+      $("#editor-textarea")?.blur();
+    }
     toggleStatusBar();
     listenToKeyEvents();
   } else if (e.key === "Escape") {
-    closePopup();
-    document.getElementById("start-menu")?.classList.add("hidden");
+    if (state.openPopup) {
+      closePopup();
+      document.getElementById("start-menu")?.classList.add("hidden");
+    } else if (
+      isEditorActive() &&
+      e.target !== document.getElementById("editor-textarea")
+    ) {
+      handleEditorEscape(e);
+    }
   } else if (
     state.openPopup === "games" &&
-    getActiveGameName() &&
-    !removeCommandMode
+    getActiveGameName()
   ) {
     handleActiveGameKey(e);
+  } else if (
+    isEditorActive() &&
+    getEditorMode() === "normal" &&
+    e.target !== document.getElementById("editor-textarea")
+  ) {
+    handleNormalModeKey(e);
   }
 });
 
@@ -371,6 +427,16 @@ changePhoto(2008);
 buildStartMenu();
 initTetris();
 initSnake();
+initEditor({
+  onExitToBanner: () => {
+    state.shouldStartEditor = true;
+  },
+  onColon: () => {
+    state.shouldStartEditor = false;
+    toggleStatusBar();
+    listenToKeyEvents();
+  },
+});
 onGameStateChange(() => {
   if (state.openPopup === "games") {
     buildMobileActions("games");

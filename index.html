@@ -27,8 +27,15 @@
     <body>
         <button class="screen-reader-text">Content</button>
         <main id="vim" class="vim">
-            <section class="editor has-caret">
-                <div class="editor--label hidden"><br /><br /></div>
+            <section class="editor hidden" id="editor">
+                <div class="editor--gutter" id="editor-gutter"></div>
+                <textarea
+                    id="editor-textarea"
+                    class="editor--textarea"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                ></textarea>
             </section>
             <!-- .editor -->
 
@@ -76,6 +83,14 @@
                             :settings<span class="key">&lt;Enter&gt;</span>
                         </span>
                         <span class="instruction--help">for settings</span>
+                    </p>
+
+                    <p class="instruction">
+                        <span class="type">type</span>
+                        <span class="command">i</span>
+                        <span class="instruction--help"
+                            >to enter insert mode</span
+                        >
                     </p>
 
                     <p class="instruction">
@@ -173,12 +188,30 @@
                         <p class="help">
                             <span class="command">i</span>
                             <span class="for"
-                                >to toggle the useless editor</span
+                                >to enter insert mode</span
                             >
                         </p>
                         <p class="help">
                             <span class="command">ESC</span>
-                            <span class="for">to return to home screen</span>
+                            <span class="for">for normal mode</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :w<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">to save buffer</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :wq<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">to save and exit</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
+                                :q<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">to exit editor / popup</span>
                         </p>
                         <p class="help">
                             <span class="command">
@@ -845,7 +878,9 @@
                 <span class="status-bar--q hidden">
                     Really? type :yes to confirm 😿 or :no to stay 😻
                 </span>
+                <span class="status-bar--msg hidden"></span>
                 <span class="status-bar--mode hidden">-- INSERT --</span>
+                <span class="status-bar--pos hidden"></span>
             </section>
             <!-- .status-bar -->
         </main>
