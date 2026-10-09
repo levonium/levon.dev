@@ -123,6 +123,12 @@ export const SECONDARY_COMMANDS = [
     fn: () => launchGame("tetris"),
   },
   {
+    name: "snake",
+    article: "games",
+    inGame: false,
+    fn: () => launchGame("snake"),
+  },
+  {
     name: "pause",
     article: "games",
     inGame: true,

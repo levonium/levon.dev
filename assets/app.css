@@ -595,76 +595,12 @@ p {
   width: 100%;
 }
 
-.games-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.games-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.game-item {
-  padding: 0.75rem 1rem;
-  background: rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-@media (max-width: 812px) {
-  .game-item {
-    background: #e0e0e0;
-    border: 2px solid;
-    border-color: var(--color-border_win) #fff #fff var(--color-border_win);
-    color: #000;
-  }
-}
-
-.game-item-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.25rem;
-}
-
-.game-name {
-  font-weight: bold;
-  font-size: 0.9375rem;
-}
-
-.game-desc {
-  font-size: 0.8125rem;
-  opacity: 0.85;
-}
-
-.game-badge {
-  font-size: 0.625rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 0.1rem 0.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  opacity: 0.7;
-}
-
-.game-badge.badge-active {
-  background: var(--color-key);
-  color: #000;
-  border-color: transparent;
-  font-weight: bold;
-  opacity: 1;
-}
-
-.game-item--upcoming {
-  opacity: 0.55;
-}
-
 .games-viewport {
   width: 100%;
 }
 
-.tetris-layout {
+.tetris-layout,
+.snake-layout {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -672,10 +608,10 @@ p {
   margin-top: 0.5rem;
 }
 
-.tetris-board-wrapper {
+.tetris-board-wrapper,
+.snake-board-wrapper {
   position: relative;
   flex-shrink: 0;
-  width: 204px;
   background-color: #0c0d0e;
   border: 2px solid;
   border-color: var(--color-border_win) #fff #fff var(--color-border_win);
@@ -683,12 +619,22 @@ p {
   line-height: 0;
 }
 
-#tetris-canvas {
+.tetris-board-wrapper {
+  width: 204px;
+}
+
+.snake-board-wrapper {
+  width: 244px;
+}
+
+#tetris-canvas,
+#snake-canvas {
   display: block;
   background-color: #0c0d0e;
 }
 
-.tetris-overlay {
+.tetris-overlay,
+.snake-overlay {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.82);
@@ -702,7 +648,8 @@ p {
   z-index: 10;
 }
 
-.tetris-overlay-msg {
+.tetris-overlay-msg,
+.snake-overlay-msg {
   color: #fff;
   font-size: 1.25rem;
   font-weight: bold;
@@ -710,24 +657,28 @@ p {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
-.tetris-overlay-hint {
+.tetris-overlay-hint,
+.snake-overlay-hint {
   color: #ddd;
   font-size: 0.75rem;
   line-height: 1.4;
 }
 
-.tetris-overlay-hint strong {
+.tetris-overlay-hint strong,
+.snake-overlay-hint strong {
   color: #fff;
 }
 
-.tetris-info {
+.tetris-info,
+.snake-info {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 1.25rem;
   min-width: 150px;
 }
 
-.tetris-card {
+.tetris-card,
+.snake-card {
   background: #c0c0c0;
   border: 2px solid;
   border-color: #fff var(--color-border_win) var(--color-border_win) #fff;
@@ -746,7 +697,8 @@ p {
   border-color: var(--color-border_win) #fff #fff var(--color-border_win);
 }
 
-.tetris-stat {
+.tetris-stat,
+.snake-stat {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -754,20 +706,23 @@ p {
   line-height: 1.4;
 }
 
-.tetris-label {
+.tetris-label,
+.snake-label {
   font-weight: bold;
   font-size: 0.6875rem;
   letter-spacing: 1px;
   color: #000;
 }
 
-.tetris-val {
+.tetris-val,
+.snake-val {
   font-weight: bold;
   font-family: monospace;
   color: #000;
 }
 
-.tetris-btn {
+.tetris-btn,
+.snake-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -787,34 +742,52 @@ p {
   -webkit-tap-highlight-color: transparent;
 }
 
-.tetris-btn:active {
+.tetris-btn:active,
+.snake-btn:active {
   border-color: var(--color-border_win) #fff #fff var(--color-border_win);
 }
 
-.tetris-controls-hint {
+.tetris-controls-hint,
+.snake-controls-hint {
   font-size: 0.875rem;
   line-height: 1.35;
   opacity: 0.9;
 }
 
-.tetris-hint-title {
+.tetris-hint-title,
+.snake-hint-title {
   font-weight: bold;
   margin-bottom: 0.35rem;
 }
 
-.tetris-hint-row {
+.tetris-hint-row,
+.snake-hint-row {
   margin-bottom: 0.2rem;
   white-space: nowrap;
 }
 
-.tetris-touch-controls {
+.tetris-touch-controls,
+.snake-touch-controls {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
   margin-top: 0.75rem;
 }
 
-.tetris-touch-btn {
+.snake-dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.snake-dpad-middle {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.tetris-touch-btn,
+.snake-touch-btn {
   width: 2.75rem;
   height: 2.5rem;
   font-size: 1.125rem;
@@ -832,18 +805,47 @@ p {
   -webkit-tap-highlight-color: transparent;
 }
 
-.tetris-touch-btn:active {
+.tetris-touch-btn:active,
+.snake-touch-btn:active {
   border-color: var(--color-border_win) #fff #fff var(--color-border_win);
 }
 
-/* Desktop terminal / Vim theme for Tetris */
+@media (max-width: 812px) {
+  .snake-layout {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .snake-info {
+    width: 244px;
+    min-width: unset;
+  }
+
+  .snake-card {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .snake-card .snake-stat {
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    gap: 0.15rem;
+  }
+}
+
+/* Desktop terminal / Vim theme for Games */
 @media (min-width: 812px) {
-  .tetris-board-wrapper {
+  .tetris-board-wrapper,
+  .snake-board-wrapper {
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
   }
 
-  .tetris-card {
+  .tetris-card,
+  .snake-card {
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--color-font__popup);
@@ -853,19 +855,22 @@ p {
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  .tetris-label {
+  .tetris-label,
+  .snake-label {
     color: var(--color-key);
     opacity: 0.9;
   }
 
-  .tetris-val {
+  .tetris-val,
+  .snake-val {
     color: var(--color-font__popup);
   }
 
-  .tetris-controls-hint {
+  .tetris-controls-hint,
+  .snake-controls-hint {
     color: var(--color-font__popup);
   }
 }
 
-/** END TETRIS **/
+/** END GAMES **/
 

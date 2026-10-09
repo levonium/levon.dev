@@ -2,11 +2,19 @@ import { $, show, hide } from "./utils.js";
 import {
   startTetris,
   pauseTetris,
-  togglePause,
+  togglePause as toggleTetrisPause,
   resetTetris,
   stopTetris,
   handleTetrisKey,
 } from "./tetris.js";
+import {
+  startSnake,
+  pauseSnake,
+  togglePause as toggleSnakePause,
+  resetSnake,
+  stopSnake,
+  handleSnakeKey,
+} from "./snake.js";
 
 export const GAMES = {
   tetris: {
@@ -16,10 +24,22 @@ export const GAMES = {
     available: true,
     start: startTetris,
     pause: pauseTetris,
-    togglePause: togglePause,
+    togglePause: toggleTetrisPause,
     restart: resetTetris,
     stop: stopTetris,
     handleKey: handleTetrisKey,
+  },
+  snake: {
+    id: "snake",
+    name: "Snake",
+    desc: "Classic terminal snake with Vim navigation.",
+    available: true,
+    start: startSnake,
+    pause: pauseSnake,
+    togglePause: toggleSnakePause,
+    restart: resetSnake,
+    stop: stopSnake,
+    handleKey: handleSnakeKey,
   },
 };
 
@@ -49,6 +69,10 @@ export function launchGame(name) {
   if (menuEl) hide(menuEl);
   if (viewportEl) show(viewportEl);
 
+  document.querySelectorAll(".game-view").forEach((v) => hide(v));
+  const activeView = $(`#game-view-${name}`);
+  if (activeView) show(activeView);
+
   const headingEl = document.querySelector(".games-header-title");
   if (headingEl) headingEl.textContent = game.name;
 
@@ -66,6 +90,7 @@ export function returnToGamesMenu() {
   }
   activeGameName = null;
 
+  document.querySelectorAll(".game-view").forEach((v) => hide(v));
   const menuEl = $("#games-menu");
   const viewportEl = $("#games-viewport");
   if (viewportEl) hide(viewportEl);

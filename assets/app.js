@@ -8,6 +8,7 @@ import {
   changePhoto,
 } from "./commands.js";
 import { initTetris } from "./tetris.js";
+import { initSnake } from "./snake.js";
 import {
   getActiveGameName,
   pauseActiveGame,
@@ -129,9 +130,13 @@ function executeCommand(command) {
     } else {
       openPopup(command);
     }
-  } else if (SECONDARY_COMMANDS.some((c) => c.name === command)) {
+  } else if (
+    SECONDARY_COMMANDS.some((c) => c.name === command) ||
+    command === "game 1" ||
+    command === "game 2"
+  ) {
     const activeGame = getActiveGameName();
-    const cmd = SECONDARY_COMMANDS.find((c) => {
+    let cmd = SECONDARY_COMMANDS.find((c) => {
       if (c.name !== command || c.article !== state.openPopup) return false;
       if (c.article === "games") {
         if (c.inGame === true && !activeGame) return false;
@@ -139,6 +144,19 @@ function executeCommand(command) {
       }
       return true;
     });
+    if (!cmd && (command === "game 1" || command === "game 2")) {
+      const gameName = command === "game 1" ? "tetris" : "snake";
+      if (state.openPopup !== "games") openPopup("games");
+      cmd = SECONDARY_COMMANDS.find(
+        (c) => c.name === gameName && c.article === "games",
+      );
+    }
+    if (!cmd && state.openPopup !== "games" && (command === "tetris" || command === "snake")) {
+      openPopup("games");
+      cmd = SECONDARY_COMMANDS.find(
+        (c) => c.name === command && c.article === "games",
+      );
+    }
     if (cmd) {
       cmd.fn();
     } else {
@@ -352,6 +370,7 @@ blink();
 changePhoto(2008);
 buildStartMenu();
 initTetris();
+initSnake();
 onGameStateChange(() => {
   if (state.openPopup === "games") {
     buildMobileActions("games");
