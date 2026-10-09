@@ -1,6 +1,6 @@
 import { $, hide, copyEmail, openLink } from "./utils.js";
 import { changeTheme, toggleClock, toggleWobble, beep } from "./effects.js";
-import { resetTetris, togglePause } from "./tetris.js";
+import { launchGame, returnToGamesMenu, getActiveGame } from "./gameManager.js";
 
 export const LEGAL_COMMANDS = [
   "q",
@@ -8,13 +8,13 @@ export const LEGAL_COMMANDS = [
   "settings",
   "email",
   "telegram",
+  "games",
   "photo",
   "source",
   "posts",
   "projects",
   "privacy",
   "terms",
-  "tetris",
 ];
 
 export const NAV_SECTIONS = LEGAL_COMMANDS.filter(
@@ -116,8 +116,30 @@ export const SECONDARY_COMMANDS = [
   { name: "clock", article: "settings", fn: toggleClock },
   { name: "wobble", article: "settings", fn: toggleWobble },
   { name: "beep", article: "settings", fn: beep },
-  { name: "restart", article: "tetris", fn: resetTetris },
-  { name: "pause", article: "tetris", fn: togglePause },
+  {
+    name: "tetris",
+    article: "games",
+    inGame: false,
+    fn: () => launchGame("tetris"),
+  },
+  {
+    name: "pause",
+    article: "games",
+    inGame: true,
+    fn: () => getActiveGame()?.togglePause(),
+  },
+  {
+    name: "restart",
+    article: "games",
+    inGame: true,
+    fn: () => getActiveGame()?.restart(),
+  },
+  {
+    name: "menu",
+    article: "games",
+    inGame: true,
+    fn: () => returnToGamesMenu(),
+  },
 ];
 
 PROJECTS.forEach((p, i) => {

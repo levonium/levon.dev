@@ -65,9 +65,9 @@
                     <p class="instruction">
                         <span class="type">type</span>
                         <span class="command">
-                            :tetris<span class="key">&lt;Enter&gt;</span>
+                            :games<span class="key">&lt;Enter&gt;</span>
                         </span>
-                        <span class="instruction--help">to play Tetris 🎮</span>
+                        <span class="instruction--help">for retro games</span>
                     </p>
 
                     <p class="instruction">
@@ -136,6 +136,12 @@
                         </p>
                         <p class="help">
                             <span class="command">
+                                :games<span class="key">&lt;Enter&gt;</span>
+                            </span>
+                            <span class="for">for retro games 🎮</span>
+                        </p>
+                        <p class="help">
+                            <span class="command">
                                 :photo<span class="key">&lt;Enter&gt;</span>
                             </span>
                             <span class="for">for photo</span>
@@ -157,12 +163,6 @@
                                 :projects<span class="key">&lt;Enter&gt;</span>
                             </span>
                             <span class="for">for projects</span>
-                        </p>
-                        <p class="help">
-                            <span class="command">
-                                :tetris<span class="key">&lt;Enter&gt;</span>
-                            </span>
-                            <span class="for">to play Tetris 🎮</span>
                         </p>
                         <p class="help">
                             <span class="command">
@@ -551,138 +551,178 @@
                         </div>
                     </article>
 
-                    <article class="popup--tetris">
+                    <article class="popup--games">
                         <h3>
                             <svg
                                 class="icon"
-                                viewBox="0 0 24 24"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
                                 <path
-                                    d="M2 2h6v6H2zm8 0h6v6h-6zm-8 8h6v6H2zm16-8h6v6h-6zm-8 8h6v6h-6zm8 0h6v6h-6zm-16 8h6v6H2zm8 0h6v6h-6zm8 0h6v6h-6z"
+                                    d="M10 2a8 8 0 100 16 8 8 0 000-16zm-1 5a1 1 0 112 0v2h2a1 1 0 110 2h-2v2a1 1 0 11-2 0v-2H7a1 1 0 110-2h2V7zm5 3a1 1 0 110-2 1 1 0 010 2zm-8 0a1 1 0 110-2 1 1 0 010 2z"
                                 />
                             </svg>
-                            Tetris
+                            <span class="games-header-title">Games</span>
                         </h3>
-                        <div class="tetris-layout">
-                            <div class="tetris-board-wrapper">
-                                <canvas
-                                    id="tetris-canvas"
-                                    width="200"
-                                    height="400"
-                                ></canvas>
-                                <div id="tetris-overlay" class="tetris-overlay hidden">
-                                    <div
-                                        class="tetris-overlay-msg"
-                                        id="tetris-overlay-msg"
-                                    >
-                                        PAUSED
+                        <div class="games-menu" id="games-menu">
+                            <p>Retro arcade &amp; terminal games.</p>
+                            <div class="games-list">
+                                <div class="game-item">
+                                    <div class="game-item-header">
+                                        <span class="game-name">1. Tetris</span>
+                                        <span class="game-badge badge-active">ready</span>
                                     </div>
-                                    <div
-                                        class="tetris-overlay-hint visible__sm"
-                                        id="tetris-overlay-hint"
-                                    ></div>
-                                    <button
-                                        type="button"
-                                        class="tetris-btn hidden__lg"
-                                        id="tetris-overlay-btn"
-                                    >
-                                        Resume
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="tetris-info">
-                                <div class="tetris-card">
-                                    <div class="tetris-label">NEXT</div>
-                                    <canvas
-                                        id="tetris-next"
-                                        width="80"
-                                        height="80"
-                                    ></canvas>
-                                </div>
-                                <div class="tetris-card">
-                                    <div class="tetris-stat">
-                                        <span class="tetris-label">SCORE</span>
-                                        <span
-                                            class="tetris-val"
-                                            id="tetris-score"
-                                            >0</span
-                                        >
-                                    </div>
-                                    <div class="tetris-stat">
-                                        <span class="tetris-label">LINES</span>
-                                        <span
-                                            class="tetris-val"
-                                            id="tetris-lines"
-                                            >0</span
-                                        >
-                                    </div>
-                                    <div class="tetris-stat">
-                                        <span class="tetris-label">LEVEL</span>
-                                        <span
-                                            class="tetris-val"
-                                            id="tetris-level"
-                                            >1</span
-                                        >
+                                    <div class="game-desc">The classic 1984 tile-matching puzzle game.</div>
+                                    <div class="popup--options visible__sm">
+                                        <p class="divider">___</p>
+                                        <p>type</p>
+                                        <p class="help">
+                                            <span class="command">
+                                                :tetris<span class="key">&lt;Enter&gt;</span>
+                                            </span>
+                                            <span class="for">to play Tetris</span>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="tetris-controls-hint visible__sm">
-                                    <div class="tetris-hint-title">Controls:</div>
-                                    <div class="tetris-hint-row">← → / H L : Move</div>
-                                    <div class="tetris-hint-row">↓ / J : Soft Drop</div>
-                                    <div class="tetris-hint-row">↑ / K : Rotate</div>
-                                    <div class="tetris-hint-row">Space : Hard Drop</div>
-                                    <div class="tetris-hint-row">P : Pause &nbsp; R : Restart</div>
-                                    <div class="tetris-hint-row">Commands: :pause, :restart</div>
+                                <div class="game-item game-item--upcoming">
+                                    <div class="game-item-header">
+                                        <span class="game-name">2. Snake</span>
+                                        <span class="game-badge">soon</span>
+                                    </div>
+                                    <div class="game-desc">Classic terminal snake with Vim navigation.</div>
+                                </div>
+                                <div class="game-item game-item--upcoming">
+                                    <div class="game-item-header">
+                                        <span class="game-name">3. Minesweeper</span>
+                                        <span class="game-badge">soon</span>
+                                    </div>
+                                    <div class="game-desc">Retro Windows 95 mine clearance.</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tetris-touch-controls hidden__lg">
-                            <button
-                                type="button"
-                                class="tetris-touch-btn"
-                                data-action="rotate"
-                                title="Rotate"
-                                aria-label="Rotate"
-                            >
-                                ↻
-                            </button>
-                            <button
-                                type="button"
-                                class="tetris-touch-btn"
-                                data-action="left"
-                                title="Move Left"
-                                aria-label="Move Left"
-                            >
-                                ◀
-                            </button>
-                            <button
-                                type="button"
-                                class="tetris-touch-btn"
-                                data-action="down"
-                                title="Soft Drop"
-                                aria-label="Soft Drop"
-                            >
-                                ▼
-                            </button>
-                            <button
-                                type="button"
-                                class="tetris-touch-btn"
-                                data-action="right"
-                                title="Move Right"
-                                aria-label="Move Right"
-                            >
-                                ▶
-                            </button>
-                            <button
-                                type="button"
-                                class="tetris-touch-btn"
-                                data-action="drop"
-                                title="Hard Drop"
-                                aria-label="Hard Drop"
-                            >
-                                ⏬
-                            </button>
+
+                        <div class="games-viewport hidden" id="games-viewport">
+                            <div class="tetris-layout">
+                                <div class="tetris-board-wrapper">
+                                    <canvas
+                                        id="tetris-canvas"
+                                        width="200"
+                                        height="400"
+                                    ></canvas>
+                                    <div id="tetris-overlay" class="tetris-overlay hidden">
+                                        <div
+                                            class="tetris-overlay-msg"
+                                            id="tetris-overlay-msg"
+                                        >
+                                            PAUSED
+                                        </div>
+                                        <div
+                                            class="tetris-overlay-hint visible__sm"
+                                            id="tetris-overlay-hint"
+                                        ></div>
+                                        <button
+                                            type="button"
+                                            class="tetris-btn hidden__lg"
+                                            id="tetris-overlay-btn"
+                                        >
+                                            Resume
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="tetris-info">
+                                    <div class="tetris-card">
+                                        <div class="tetris-label">NEXT</div>
+                                        <canvas
+                                            id="tetris-next"
+                                            width="80"
+                                            height="80"
+                                        ></canvas>
+                                    </div>
+                                    <div class="tetris-card">
+                                        <div class="tetris-stat">
+                                            <span class="tetris-label">SCORE</span>
+                                            <span
+                                                class="tetris-val"
+                                                id="tetris-score"
+                                                >0</span
+                                            >
+                                        </div>
+                                        <div class="tetris-stat">
+                                            <span class="tetris-label">LINES</span>
+                                            <span
+                                                class="tetris-val"
+                                                id="tetris-lines"
+                                                >0</span
+                                            >
+                                        </div>
+                                        <div class="tetris-stat">
+                                            <span class="tetris-label">LEVEL</span>
+                                            <span
+                                                class="tetris-val"
+                                                id="tetris-level"
+                                                >1</span
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="tetris-controls-hint visible__sm">
+                                        <div class="tetris-hint-title">Controls:</div>
+                                        <div class="tetris-hint-row">← → / H L : Move</div>
+                                        <div class="tetris-hint-row">↓ / J : Soft Drop</div>
+                                        <div class="tetris-hint-row">↑ / K : Rotate</div>
+                                        <div class="tetris-hint-row">Space : Hard Drop</div>
+                                        <div class="tetris-hint-row">P : Pause &nbsp; R : Restart</div>
+                                        <div class="tetris-hint-row">Commands: :pause, :restart, :menu</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tetris-touch-controls hidden__lg">
+                                <button
+                                    type="button"
+                                    class="tetris-touch-btn"
+                                    data-action="rotate"
+                                    title="Rotate"
+                                    aria-label="Rotate"
+                                >
+                                    ↻
+                                </button>
+                                <button
+                                    type="button"
+                                    class="tetris-touch-btn"
+                                    data-action="left"
+                                    title="Move Left"
+                                    aria-label="Move Left"
+                                >
+                                    ◀
+                                </button>
+                                <button
+                                    type="button"
+                                    class="tetris-touch-btn"
+                                    data-action="down"
+                                    title="Soft Drop"
+                                    aria-label="Soft Drop"
+                                >
+                                    ▼
+                                </button>
+                                <button
+                                    type="button"
+                                    class="tetris-touch-btn"
+                                    data-action="right"
+                                    title="Move Right"
+                                    aria-label="Move Right"
+                                >
+                                    ▶
+                                </button>
+                                <button
+                                    type="button"
+                                    class="tetris-touch-btn"
+                                    data-action="drop"
+                                    title="Hard Drop"
+                                    aria-label="Hard Drop"
+                                >
+                                    ⏬
+                                </button>
+                            </div>
                         </div>
                     </article>
                 </div>

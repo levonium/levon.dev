@@ -7,12 +7,15 @@ import {
   SECONDARY_COMMANDS,
   changePhoto,
 } from "./commands.js";
+import { initTetris } from "./tetris.js";
 import {
-  initTetris,
-  startTetris,
-  pauseTetris,
-  handleTetrisKey,
-} from "./tetris.js";
+  getActiveGameName,
+  pauseActiveGame,
+  stopActiveGame,
+  handleActiveGameKey,
+  returnToGamesMenu,
+  onGameStateChange,
+} from "./gameManager.js";
 
 // --- State ---
 const state = {
@@ -127,9 +130,15 @@ function executeCommand(command) {
       openPopup(command);
     }
   } else if (SECONDARY_COMMANDS.some((c) => c.name === command)) {
-    const cmd = SECONDARY_COMMANDS.find(
-      (c) => c.name === command && c.article === state.openPopup,
-    );
+    const activeGame = getActiveGameName();
+    const cmd = SECONDARY_COMMANDS.find((c) => {
+      if (c.name !== command || c.article !== state.openPopup) return false;
+      if (c.article === "games") {
+        if (c.inGame === true && !activeGame) return false;
+        if (c.inGame === false && activeGame) return false;
+      }
+      return true;
+    });
     if (cmd) {
       cmd.fn();
     } else {
@@ -221,7 +230,15 @@ function buildMobileActions(section) {
   if (!container) return;
   container.innerHTML = "";
 
-  const entries = SECONDARY_COMMANDS.filter((cmd) => cmd.article === section);
+  const activeGame = getActiveGameName();
+  const entries = SECONDARY_COMMANDS.filter((cmd) => {
+    if (cmd.article !== section) return false;
+    if (section === "games") {
+      if (cmd.inGame === true && !activeGame) return false;
+      if (cmd.inGame === false && activeGame) return false;
+    }
+    return true;
+  });
   if (entries.length === 0) return;
 
   entries.forEach((cmd) => {
@@ -247,9 +264,15 @@ function blink() {
 
 // === Event listeners ===
 
-registerPopupHook("tetris", {
-  onOpen: startTetris,
-  onClose: pauseTetris,
+registerPopupHook("games", {
+  onOpen: () => {
+    if (!getActiveGameName()) {
+      returnToGamesMenu();
+    }
+  },
+  onClose: () => {
+    stopActiveGame();
+  },
 });
 
 // Editor: press i to enter insert mode
@@ -285,14 +308,18 @@ editor.addEventListener("keydown", (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === ":") {
     state.shouldStartEditor = false;
-    if (state.openPopup === "tetris") pauseTetris();
+    if (state.openPopup === "games") pauseActiveGame();
     toggleStatusBar();
     listenToKeyEvents();
   } else if (e.key === "Escape") {
     closePopup();
     document.getElementById("start-menu")?.classList.add("hidden");
-  } else if (state.openPopup === "tetris" && !removeCommandMode) {
-    handleTetrisKey(e);
+  } else if (
+    state.openPopup === "games" &&
+    getActiveGameName() &&
+    !removeCommandMode
+  ) {
+    handleActiveGameKey(e);
   }
 });
 
@@ -325,6 +352,11 @@ blink();
 changePhoto(2008);
 buildStartMenu();
 initTetris();
+onGameStateChange(() => {
+  if (state.openPopup === "games") {
+    buildMobileActions("games");
+  }
+});
 
 // Win95: taskbar clock (always on)
 const taskbarClock = document.querySelector(".clock");
