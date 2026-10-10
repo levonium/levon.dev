@@ -129,6 +129,18 @@ export const SECONDARY_COMMANDS = [
     fn: () => launchGame("snake"),
   },
   {
+    name: "mines",
+    article: "games",
+    inGame: false,
+    fn: () => launchGame("mines"),
+  },
+  {
+    name: "minesweeper",
+    article: "games",
+    inGame: false,
+    fn: () => launchGame("mines"),
+  },
+  {
     name: "pause",
     article: "games",
     inGame: true,

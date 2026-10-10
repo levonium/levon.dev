@@ -15,6 +15,14 @@ import {
   stopSnake,
   handleSnakeKey,
 } from "./snake.js";
+import {
+  startMinesweeper,
+  pauseMinesweeper,
+  togglePause as toggleMinesweeperPause,
+  resetMinesweeper,
+  stopMinesweeper,
+  handleMinesweeperKey,
+} from "./minesweeper.js";
 
 export const GAMES = {
   tetris: {
@@ -41,6 +49,18 @@ export const GAMES = {
     stop: stopSnake,
     handleKey: handleSnakeKey,
   },
+  mines: {
+    id: "mines",
+    name: "Minesweeper",
+    desc: "Retro Windows 95 mine clearance with Vim controls.",
+    available: true,
+    start: startMinesweeper,
+    pause: pauseMinesweeper,
+    togglePause: toggleMinesweeperPause,
+    restart: resetMinesweeper,
+    stop: stopMinesweeper,
+    handleKey: handleMinesweeperKey,
+  },
 };
 
 let activeGameName = null;
@@ -61,6 +81,10 @@ export function getActiveGame() {
 export function launchGame(name) {
   const game = GAMES[name];
   if (!game || !game.available) return;
+
+  if (activeGameName && GAMES[activeGameName]) {
+    GAMES[activeGameName].stop();
+  }
 
   activeGameName = name;
 

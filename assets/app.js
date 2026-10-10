@@ -9,6 +9,7 @@ import {
 } from "./commands.js";
 import { initTetris } from "./tetris.js";
 import { initSnake } from "./snake.js";
+import { initMinesweeper } from "./minesweeper.js";
 import {
   getActiveGameName,
   pauseActiveGame,
@@ -171,7 +172,8 @@ function executeCommand(command) {
   } else if (
     SECONDARY_COMMANDS.some((c) => c.name === command) ||
     command === "game 1" ||
-    command === "game 2"
+    command === "game 2" ||
+    command === "game 3"
   ) {
     const activeGame = getActiveGameName();
     let cmd = SECONDARY_COMMANDS.find((c) => {
@@ -182,17 +184,22 @@ function executeCommand(command) {
       }
       return true;
     });
-    if (!cmd && (command === "game 1" || command === "game 2")) {
-      const gameName = command === "game 1" ? "tetris" : "snake";
+    if (!cmd && (command === "game 1" || command === "game 2" || command === "game 3")) {
+      const gameMap = { "game 1": "tetris", "game 2": "snake", "game 3": "mines" };
+      const gameName = gameMap[command];
       if (state.openPopup !== "games") openPopup("games");
       cmd = SECONDARY_COMMANDS.find(
         (c) => c.name === gameName && c.article === "games",
       );
     }
-    if (!cmd && state.openPopup !== "games" && (command === "tetris" || command === "snake")) {
-      openPopup("games");
+    if (
+      !cmd &&
+      (command === "tetris" || command === "snake" || command === "mines" || command === "minesweeper")
+    ) {
+      if (state.openPopup !== "games") openPopup("games");
+      const targetName = command === "minesweeper" ? "mines" : command;
       cmd = SECONDARY_COMMANDS.find(
-        (c) => c.name === command && c.article === "games",
+        (c) => c.name === targetName && c.article === "games",
       );
     }
     if (cmd) {
@@ -427,6 +434,7 @@ changePhoto(2008);
 buildStartMenu();
 initTetris();
 initSnake();
+initMinesweeper();
 initEditor({
   onExitToBanner: () => {
     state.shouldStartEditor = true;

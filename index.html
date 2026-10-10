@@ -611,7 +611,7 @@
                                 </li>
                                 <li>
                                     <strong>Minesweeper</strong>
-                                    -&gt; retro Windows 95 mine clearance (coming soon)
+                                    -&gt; retro Windows 95 mine clearance
                                 </li>
                             </ol>
                             <div class="popup--options visible__sm">
@@ -628,6 +628,12 @@
                                         :snake<span class="key">&lt;Enter&gt;</span>
                                     </span>
                                     <span class="for">to play Snake</span>
+                                </p>
+                                <p class="help">
+                                    <span class="command">
+                                        :mines<span class="key">&lt;Enter&gt;</span>
+                                    </span>
+                                    <span class="for">to play Minesweeper</span>
                                 </p>
                             </div>
                         </div>
@@ -857,6 +863,61 @@
                                             >
                                                 ▶
                                             </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="game-view-mines" class="game-view hidden">
+                                <div class="mines-layout">
+                                    <div class="mines-window">
+                                        <div class="mines-header-bar">
+                                            <div class="mines-digital-display" id="mines-count">010</div>
+                                            <button
+                                                type="button"
+                                                class="mines-face-btn"
+                                                id="mines-face-btn"
+                                                title="Reset game"
+                                                aria-label="Reset game"
+                                            >🙂</button>
+                                            <div class="mines-digital-display" id="mines-timer">000</div>
+                                        </div>
+                                        <div class="mines-board-wrapper">
+                                            <div class="mines-board" id="mines-board"></div>
+                                            <div id="mines-overlay" class="mines-overlay hidden">
+                                                <div class="mines-overlay-msg" id="mines-overlay-msg">PAUSED</div>
+                                                <div
+                                                    class="mines-overlay-hint visible__sm"
+                                                    id="mines-overlay-hint"
+                                                ></div>
+                                                <button
+                                                    type="button"
+                                                    class="mines-btn hidden__lg"
+                                                    id="mines-overlay-btn"
+                                                >Resume</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mines-info">
+                                        <div class="mines-card">
+                                            <div class="mines-stat">
+                                                <span class="mines-label">BEST TIME</span>
+                                                <span class="mines-val" id="mines-best-time">--</span>
+                                            </div>
+                                        </div>
+                                        <div class="mines-controls-hint visible__sm">
+                                            <div class="mines-hint-title">Controls:</div>
+                                            <div class="mines-hint-row">← → ↓ ↑ / H J K L : Navigate</div>
+                                            <div class="mines-hint-row">Space / Enter : Dig</div>
+                                            <div class="mines-hint-row">F : Flag &nbsp; R : Restart</div>
+                                            <div class="mines-hint-row">Commands: :pause, :restart, :menu</div>
+                                        </div>
+                                        <div class="mines-mobile-toolbar hidden__lg">
+                                            <button
+                                                type="button"
+                                                class="mines-touch-mode-btn"
+                                                id="mines-touch-mode-btn"
+                                            >⛏️ Dig</button>
                                         </div>
                                     </div>
                                 </div>
