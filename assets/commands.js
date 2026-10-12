@@ -74,6 +74,7 @@ export const LETTER_KEYS = {
 };
 
 export const PROJECTS = [
+  { url: "https://vika.levon.dev", label: "vika" },
   { url: "https://tablrr.app", label: "tablrr.app" },
   { url: "https://affkraft.com", label: "AffKraft.com" },
   { url: "https://learnmarkdown.com", label: "Learn Markdown" },
